@@ -95,7 +95,7 @@
       "availableNow": "Disponible",
       "mtnUsers": "4M+ utilisateurs",
       "orangeUsers": "3M+ utilisateurs",
-      "comingSoon": "D'autres prestataires bientôt disponibles — Wave, Visa, Mastercard & plus"
+      "comingSoon": "D'autres prestataires bientôt disponibles - Wave, Visa, Mastercard & plus"
     },
     "WhyChoose": {
       "badge": "Avantages",
@@ -681,7 +681,7 @@
         "cancel": "Annuler",
         "confirm": "Confirmer",
         "passwordUpdated": "Mot de passe mis à jour",
-        "oauthDesc": "Connexion via compte externe — pas de mot de passe local",
+        "oauthDesc": "Connexion via compte externe - pas de mot de passe local",
         "genericError": "Une erreur est survenue.",
         "passwordRules": {
           "length": "Min. 8 caractères",
@@ -887,7 +887,7 @@
         "logoSelectFile": "Choisir un fichier",
         "logoChangeFile": "Changer de fichier",
         "logoRemove": "Supprimer",
-        "logoFileTypes": "PNG, JPG, SVG ou WebP — max 2 Mo",
+        "logoFileTypes": "PNG, JPG, SVG ou WebP - max 2 Mo",
         "logoDefaultCaption": "Le logo SharePay sera utilisé par défaut.",
         "thankYouLabel": "Message de remerciement",
         "thankYouPlaceholder": "Ex : Merci pour votre contribution !",
@@ -989,6 +989,7 @@
         "copyRef": "Copier la référence",
         "successCopy": "Copié !",
         "descRefCopy": "La référence de la transaction a été copiée.",
+        "descPhoneCopy": "Le numéro du payeur a été copié.",
         "filterPlaceholder": "Filtrer par client, référence…",
         "statusAll": "Tous les statuts",
         "statusSuccess": "Succès",
@@ -1143,7 +1144,7 @@
           "logoSelectFile": "Choisir un fichier",
           "logoChangeFile": "Changer de fichier",
           "logoRemove": "Supprimer",
-          "logoFileTypes": "PNG, JPG, SVG ou WebP — max 2 Mo",
+          "logoFileTypes": "PNG, JPG, SVG ou WebP - max 2 Mo",
           "logoDefaultCaption": "Le logo SharePay sera utilisé par défaut.",
           "logoUrlHint": "Entrez l'URL complète de votre logo (optionnel).",
           "logoUrlInvalid": "URL invalide. Elle doit commencer par http:// ou https://.",
@@ -1177,7 +1178,7 @@
           "downloaded": "Fichier téléchargé !",
           "confirmSaved": "J'ai sauvegardé mes secrets en lieu sûr",
           "confirmOnce": "Confirmez que vous avez bien sauvegardé ces informations.",
-          "confirmFinal": "Oui, j'ai sauvegardé — Continuer",
+          "confirmFinal": "Oui, j'ai sauvegardé - Continuer",
           "keyCreated": "Votre clé API a été créée avec succès."
         },
         "APIKeys": {
@@ -1247,7 +1248,7 @@
             "rotating": "Rotation en cours…",
             "revokeButton": "Révoquer",
             "revoking": "Révocation en cours…",
-            "createSuccess": "Secret créé. Sauvegardez-le maintenant — il ne sera plus affiché.",
+            "createSuccess": "Secret créé. Sauvegardez-le maintenant - il ne sera plus affiché.",
             "rotateSuccess": "Secret renouvelé. L'ancien secret est révoqué.",
             "revokeSuccess": "Secret webhook révoqué.",
             "copied": "Copié !",
@@ -1599,9 +1600,9 @@
     "Billing": {
       "title": "Facturation & Frais",
       "q1": "Y a-t-il des frais mensuels ou de mise en place ?",
-      "a1": "Non. SharePay fonctionne sur un modèle pur à l'usage. Vous ne payez qu'un faible pourcentage par transaction réussie — aucun frais mensuel, de mise en place ni de coût caché.",
+      "a1": "Non. SharePay fonctionne sur un modèle pur à l'usage. Vous ne payez qu'un faible pourcentage par transaction réussie - aucun frais mensuel, de mise en place ni de coût caché.",
       "q2": "Quel est le taux de commission par transaction ?",
-      "a2": "Le taux standard est de 1,5 % par transaction Mobile Money. Des remises sur volume sont disponibles pour les marchands à fort trafic — contactez-nous pour un devis personnalisé.",
+      "a2": "Le taux standard est de 1,5 % par transaction Mobile Money. Des remises sur volume sont disponibles pour les marchands à fort trafic - contactez-nous pour un devis personnalisé.",
       "q3": "Quand les fonds sont-ils disponibles après un paiement ?",
       "a3": "Les fonds sont généralement disponibles pour reversement dans les 24 heures suivant une transaction réussie, selon votre calendrier de reversement configuré.",
       "q4": "Puis-je changer de plan tarifaire à tout moment ?",

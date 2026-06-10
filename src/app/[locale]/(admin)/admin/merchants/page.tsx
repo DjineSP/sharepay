@@ -219,7 +219,7 @@ export default function AdminMerchantsPage() {
             {data && data.totalPages > 1 && (
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                     <span>
-                        {data.totalElements} marchand{data.totalElements > 1 ? "s" : ""} — Page {data.page + 1} / {data.totalPages}
+                        {data.totalElements} marchand{data.totalElements > 1 ? "s" : ""} - Page {data.page + 1} / {data.totalPages}
                     </span>
                     <div className="flex gap-2">
                         <Button variant="outline" size="sm" disabled={page === 0} onClick={() => setPage(p => p - 1)}>

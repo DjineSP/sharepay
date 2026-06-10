@@ -69,7 +69,7 @@ export function AppBrandingSection({
 
     const logoPreview = logoMode === "url" ? logoUrlInput : logoMode === "upload" ? logoDataUrl : undefined;
 
-    // ── Simple mode (create page — logo URL + theme color) ───────────────────
+    // ── Simple mode (create page - logo URL + theme color) ───────────────────
     if (simple) {
         return (
             <section className="flex flex-col">

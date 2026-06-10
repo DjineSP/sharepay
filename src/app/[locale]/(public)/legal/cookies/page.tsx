@@ -39,7 +39,7 @@ export default function CookiesPage() {
           Politique relative aux Cookies
         </h1>
         <p className="text-sm text-muted-foreground mb-2 font-medium uppercase tracking-wide">
-          SharePay — Cookies &amp; Traceurs
+          SharePay - Cookies &amp; Traceurs
         </p>
         <p className="text-muted-foreground mb-12 leading-relaxed">
           Dernière mise à jour : 13 Mai 2026. SharePay utilise des cookies afin
@@ -160,7 +160,7 @@ export default function CookiesPage() {
           <SectionBlock title="9. Contact">
             <Prose>
               Pour toute question relative à l'utilisation des cookies,
-              contactez-nous à : contact@sharepay.cm — Yaoundé, Cameroun.
+              contactez-nous à : contact@sharepay.cm - Yaoundé, Cameroun.
             </Prose>
           </SectionBlock>
 

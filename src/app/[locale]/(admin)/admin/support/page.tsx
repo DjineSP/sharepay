@@ -159,7 +159,7 @@ export default function AdminSupportPage() {
                                 <TableRow key={agent.id}>
                                     <TableCell className="font-medium">{agent.fullName}</TableCell>
                                     <TableCell className="text-muted-foreground">{agent.email}</TableCell>
-                                    <TableCell className="text-muted-foreground">{agent.phone ?? "—"}</TableCell>
+                                    <TableCell className="text-muted-foreground">{agent.phone ?? "-"}</TableCell>
                                     <TableCell>
                                         <Badge variant={statusVariant(agent.status)}>{STATUS_LABELS[agent.status]}</Badge>
                                     </TableCell>
@@ -201,7 +201,7 @@ export default function AdminSupportPage() {
             {data && data.totalPages > 1 && (
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                     <span>
-                        {data.totalElements} agent{data.totalElements > 1 ? "s" : ""} — Page {data.page + 1} / {data.totalPages}
+                        {data.totalElements} agent{data.totalElements > 1 ? "s" : ""} - Page {data.page + 1} / {data.totalPages}
                     </span>
                     <div className="flex gap-2">
                         <Button variant="outline" size="sm" disabled={page === 0} onClick={() => setPage(p => p - 1)}>

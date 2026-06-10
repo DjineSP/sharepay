@@ -11,7 +11,7 @@ export interface ApiKeyResponse {
     keyPrefix: string;
     environment: AppKeyEnvironment;
     active: boolean;
-    plainTextKey?: string;        // full key — returned only once at creation/rotation
+    plainTextKey?: string;        // full key - returned only once at creation/rotation
     lastUsedAt: string | null;
     createdAt: string;
     updatedAt: string;

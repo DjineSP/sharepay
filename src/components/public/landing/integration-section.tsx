@@ -106,7 +106,7 @@ export function IntegrationSection() {
             <div className="container mx-auto relative z-10">
                 <div className="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
 
-                    {/* Left — title, subtitle, 2×2 features */}
+                    {/* Left - title, subtitle, 2×2 features */}
                     <div>
                         <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-5 leading-tight">
                             {t('title')}
@@ -130,7 +130,7 @@ export function IntegrationSection() {
                         </div>
                     </div>
 
-                    {/* Right — code editor */}
+                    {/* Right - code editor */}
                     <div className="relative">
                         <div className="absolute -inset-1 bg-gradient-to-br from-emerald-500/20 to-primary/20 rounded-2xl blur-xl opacity-50" />
 

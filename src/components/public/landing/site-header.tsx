@@ -87,7 +87,7 @@ export function SiteHeader() {
 
     return (
         <>
-            {/* Backdrop overlay — closes mobile menu on outside click */}
+            {/* Backdrop overlay - closes mobile menu on outside click */}
             {isMobileMenuOpen && (
                 <div
                     className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden animate-in fade-in duration-200"
@@ -140,19 +140,19 @@ export function SiteHeader() {
                         {/* Right actions */}
                         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
 
-                            {/* Theme + Language — hidden below xl */}
+                            {/* Theme + Language - hidden below xl */}
                             <div className="hidden xl:flex items-center gap-0 border rounded-full pl-1 pr-3 py-1 bg-background/50 shadow-sm hover:border-primary/50 transition-colors">
                                 <ThemeToggle />
                                 <div className="h-4 w-px bg-border mx-1" />
                                 <LanguageSwitcher />
                             </div>
 
-                            {/* Auth actions — chaque élément a son propre breakpoint */}
+                            {/* Auth actions - chaque élément a son propre breakpoint */}
                             {isLoading ? (
                                 <div className="hidden sm:flex h-9 w-32 animate-pulse bg-muted rounded-full" />
                             ) : isAuthenticated ? (
                                 <>
-                                    {/* Dashboard — hidden below lg */}
+                                    {/* Dashboard - hidden below lg */}
                                     <div className="hidden lg:flex items-center gap-2">
                                         <Button variant="ghost" size="sm" className="font-medium rounded-full gap-1.5" asChild>
                                             <Link href="/merchant/dashboard">
@@ -162,7 +162,7 @@ export function SiteHeader() {
                                         </Button>
                                         <div className="h-6 w-px bg-border" />
                                     </div>
-                                    {/* Avatar — hidden below sm */}
+                                    {/* Avatar - hidden below sm */}
                                     <div className="hidden sm:flex">
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
@@ -181,7 +181,7 @@ export function SiteHeader() {
                                                     className="font-semibold cursor-pointer hover:bg-muted/60 rounded-sm transition-colors"
                                                     onClick={() => router.push('/merchant/profile')}
                                                 >
-                                                    <p>{userInfo?.fullName ?? "—"}</p>
+                                                    <p>{userInfo?.fullName ?? "-"}</p>
                                                     <p className="text-xs text-muted-foreground font-normal truncate">{userInfo?.email ?? ""}</p>
                                                 </DropdownMenuLabel>
                                                 <DropdownMenuSeparator />
@@ -202,7 +202,7 @@ export function SiteHeader() {
                                 </>
                             ) : (
                                 <>
-                                    {/* Login — hidden below lg */}
+                                    {/* Login - hidden below lg */}
                                     <div className="hidden lg:flex">
                                         <Button variant="ghost" size="sm" className="font-medium rounded-full gap-1.5" asChild>
                                             <Link href="/merchant/login">
@@ -211,7 +211,7 @@ export function SiteHeader() {
                                             </Link>
                                         </Button>
                                     </div>
-                                    {/* Get Started — hidden below sm (CTA prioritaire) */}
+                                    {/* Get Started - hidden below sm (CTA prioritaire) */}
                                     <div className="hidden sm:flex">
                                         <Button size="sm" asChild className="font-semibold rounded-full gap-1.5 shadow-md hover:shadow-lg transition-all">
                                             <Link href="/merchant/register">
@@ -223,7 +223,7 @@ export function SiteHeader() {
                                 </>
                             )}
 
-                            {/* Hamburger — hidden at lg+ */}
+                            {/* Hamburger - hidden at lg+ */}
                             <button
                                 className="lg:hidden p-2 rounded-full text-muted-foreground hover:text-primary hover:bg-muted/50 transition-colors"
                                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -287,7 +287,7 @@ export function SiteHeader() {
                                             </Avatar>
                                         </div>
                                         <div className="flex flex-col min-w-0">
-                                            <span className="font-semibold text-sm truncate">{userInfo?.fullName ?? "—"}</span>
+                                            <span className="font-semibold text-sm truncate">{userInfo?.fullName ?? "-"}</span>
                                             <span className="text-xs text-muted-foreground truncate">{userInfo?.email ?? ""}</span>
                                         </div>
                                     </div>

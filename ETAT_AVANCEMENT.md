@@ -1,4 +1,4 @@
-# État d'Avancement — Sharepay
+# État d'Avancement - Sharepay
 
 > Recensement de tout ce qui est déjà implémenté dans le projet, avec description technique.
 > Mis à jour le 26 février 2026.
@@ -44,7 +44,7 @@
 
 ### ✅ Internationalisation (`next-intl`)
 - Locales : `fr` (défaut), `en`
-- `localePrefix: 'never'` — URLs sans préfixe de langue
+- `localePrefix: 'never'` - URLs sans préfixe de langue
 - Fichiers de messages complets : `fr.json` (~33 Ko) et `en.json` (~31 Ko)
 - Composants de navigation i18n exportés depuis `core/i18n/routing.ts`
 
@@ -75,23 +75,23 @@ Tous les endpoints du cycle d'authentification sont implémentés :
 📌 `loginWithGoogle()` est déclarée mais non implémentée (throw NotImplemented).
 
 ### ✅ Types Auth (`core/types/auth.types.ts`)
-- `ApiResponse<T>` — wrapper générique standard
+- `ApiResponse<T>` - wrapper générique standard
 - `RegisterRequest`, `LoginRequest`, `VerifyEmailRequest`
 - `ForgotPasswordRequest`, `VerifyResetCodeRequest`, `ResetPasswordRequest`
 - `AuthTokenData`, `UserProfile`, `VerifyResetCodeResponse`
 
 ### ✅ Pages Auth (routes)
 Toutes les routes `(auth)` sont créées :
-- `/login` — Connexion
-- `/register` — Inscription
-- `/verify-email` — Vérification OTP
-- `/forgot-password` — Mot de passe oublié
-- `/verify-reset-code` — Vérification OTP reset
-- `/reset-password` — Nouveau mot de passe
+- `/login` - Connexion
+- `/register` - Inscription
+- `/verify-email` - Vérification OTP
+- `/forgot-password` - Mot de passe oublié
+- `/verify-reset-code` - Vérification OTP reset
+- `/reset-password` - Nouveau mot de passe
 
 ---
 
-## 3. Dashboard — Layout général
+## 3. Dashboard - Layout général
 
 ### ✅ Sidebar (`components/dashboard/dashboard-sidebar.tsx`)
 - Navigation vers toutes les sections du dashboard
@@ -110,7 +110,7 @@ Toutes les routes `(auth)` sont créées :
 
 ---
 
-## 4. Dashboard — Overview (Tableau de bord principal)
+## 4. Dashboard - Overview (Tableau de bord principal)
 
 ### 🔶 Page Overview (`dashboard/page.tsx`)
 - **Structure UI complète** : heading, grille de stats, graphique de transactions, activité récente, carte de conseil
@@ -120,7 +120,7 @@ Toutes les routes `(auth)` sont créées :
 #### Composants Overview ✅ (UI complète)
 - `OverviewPageHeading` : titre + sous-titre avec traductions
 - `OverviewStatsGrid` : grille de 3 cartes KPI (solde, règlements, volume journalier) avec icônes, badges, et barres de progression
-- `OverviewTransactionChartCard` : graphique de transactions interactif avec sélecteur de plage temporelle (7j, 30j, 90j, personnalisé) — données générées par `core/data/dashboard.ts`
+- `OverviewTransactionChartCard` : graphique de transactions interactif avec sélecteur de plage temporelle (7j, 30j, 90j, personnalisé) - données générées par `core/data/dashboard.ts`
 - `OverviewRecentActivity` : feed d'activité avec scroll (commandes, remboursements, échecs)
 - `OverviewInsightCard` : carte de conseil d'optimisation avec CTA
 
@@ -128,7 +128,7 @@ Toutes les routes `(auth)` sont créées :
 
 ---
 
-## 5. Dashboard — Applications (Apps)
+## 5. Dashboard - Applications (Apps)
 
 ### ✅ Types Apps (`core/types/apps.types.ts`)
 - `AppResponse`, `ApiKeyResponse`, `CreateAppRequest`, `UpdateAppRequest`
@@ -155,10 +155,10 @@ Toutes les routes `(auth)` sont créées :
 
 ---
 
-## 6. Dashboard — Transactions
+## 6. Dashboard - Transactions
 
 ### ✅ Composants Transactions (UI complète)
-- `TransactionsTable` : tableau complet avec TanStack Table — pagination, filtrage par statut/période, colonnes triables, affichage du statut API brut (`statut`)
+- `TransactionsTable` : tableau complet avec TanStack Table - pagination, filtrage par statut/période, colonnes triables, affichage du statut API brut (`statut`)
 - `TransactionsStats` : résumé statistique (nombre de transactions, montants)
 - `TransactionsAppSelector` : sélecteur d'application pour filtrer les transactions
 
@@ -168,12 +168,12 @@ Toutes les routes `(auth)` sont créées :
 
 ---
 
-## 7. Dashboard — Liens de Paiement (Payment Links)
+## 7. Dashboard - Liens de Paiement (Payment Links)
 
 ### ✅ Composants Payment Links (UI complète)
 
 #### Liste
-- `PaymentLinksTable` : tableau avec TanStack Table — pagination, filtres, colonnes (nom, montant, statut, vues, conversions)
+- `PaymentLinksTable` : tableau avec TanStack Table - pagination, filtres, colonnes (nom, montant, statut, vues, conversions)
 - `PaymentLinkStats` : statistiques (total, actifs, montant généré, taux de conversion)
 
 #### Création (`payment-links/new/`)
@@ -184,12 +184,12 @@ Toutes les routes `(auth)` sont créées :
 - `PaymentPreview` : aperçu temps réel du lien en cours de création
 
 ### 🔶 Pages Payment Links
-- Liste : UI complète — **données mock**
-- Nouvelle : formulaire multi-sections complet — **pas encore connecté au backend**
+- Liste : UI complète - **données mock**
+- Nouvelle : formulaire multi-sections complet - **pas encore connecté au backend**
 
 ---
 
-## 8. Dashboard — Retraits (Withdrawals)
+## 8. Dashboard - Retraits (Withdrawals)
 
 ### ✅ Composants Withdrawals (UI complète)
 - `WithdrawalsClientPage` : orchestrateur de la page (logique d'état globale)
@@ -200,18 +200,18 @@ Toutes les routes `(auth)` sont créées :
 - `WithdrawalsHistoryTable` : tableau historique des retraits passés
 
 ### 🔶 Page Withdrawals
-- UI complète — **données mock**, pas encore connecté au backend
+- UI complète - **données mock**, pas encore connecté au backend
 
 ---
 
-## 9. Dashboard — Notifications
+## 9. Dashboard - Notifications
 
 ### 🔶 Page Notifications (`dashboard/notifications/page.tsx`)
 - Route créée, contenu à définir
 
 ---
 
-## 10. Dashboard — Profil & Paramètres
+## 10. Dashboard - Profil & Paramètres
 
 ### 🔶 Page Profil (`dashboard/profile/page.tsx`)
 - Composants dans `components/dashboard/profile/` (4 fichiers)
@@ -252,7 +252,7 @@ Documentation technique intégrée avec :
 
 ## 12. Composants Partagés & Design System
 
-### ✅ Primitives UI (`components/ui/`) — 20 composants
+### ✅ Primitives UI (`components/ui/`) - 20 composants
 
 | Composant | Usage |
 |---|---|
@@ -289,7 +289,7 @@ Documentation technique intégrée avec :
 
 | Module | UI | Logique / API | État |
 |---|---|---|---|
-| Infrastructure (config, proxy, Axios, tokens) | — | ✅ | ✅ Complet |
+| Infrastructure (config, proxy, Axios, tokens) | - | ✅ | ✅ Complet |
 | Auth (service, types, pages) | ✅ | ✅ | ✅ Complet |
 | Dashboard Layout (sidebar, header) | ✅ | ✅ | ✅ Complet |
 | Overview (chart, stats, activities) | ✅ | 🔶 Mock | 🔶 UI faite, données mock |
@@ -300,11 +300,11 @@ Documentation technique intégrée avec :
 | Notifications | 🔶 | 🔴 | 🔶 Ébauche |
 | Profil | 🔶 | 🔶 | 🔶 UI présente |
 | Paramètres | 🔶 | 🔴 | 🔶 Ébauche |
-| Landing Page | ✅ | — | ✅ Complet |
-| Documentation Développeur | ✅ | — | ✅ Complet |
-| FAQ | ✅ | — | ✅ Complet |
-| i18n (FR + EN) | ✅ | — | ✅ Complet |
-| Design System (UI primitives) | ✅ | — | ✅ Complet |
+| Landing Page | ✅ | - | ✅ Complet |
+| Documentation Développeur | ✅ | - | ✅ Complet |
+| FAQ | ✅ | - | ✅ Complet |
+| i18n (FR + EN) | ✅ | - | ✅ Complet |
+| Design System (UI primitives) | ✅ | - | ✅ Complet |
 
 ---
 
@@ -312,7 +312,7 @@ Documentation technique intégrée avec :
 
 1. **Connexion API réelle** : Les pages Overview, Transactions, Payment Links et Withdrawals utilisent encore des données mock. La priorité est de les connecter aux vrais endpoints backend.
 2. **Service manquants** : Il n'existe pas encore de services pour les transactions, les liens de paiement, les retraits et les notifications (à créer dans `core/services/`).
-3. **Gestion de l'état utilisateur** : Pas de store global (Redux/Zustand/Context) — la session est gérée uniquement via les tokens stockés. Un `AuthContext` ou un hook `useCurrentUser` pourrait centraliser l'état de l'utilisateur connecté.
-4. **Authentification côté serveur** : Le middleware Next.js pour protéger les routes côté serveur n'est pas encore visible — à vérifier ou à implémenter si absent.
+3. **Gestion de l'état utilisateur** : Pas de store global (Redux/Zustand/Context) - la session est gérée uniquement via les tokens stockés. Un `AuthContext` ou un hook `useCurrentUser` pourrait centraliser l'état de l'utilisateur connecté.
+4. **Authentification côté serveur** : Le middleware Next.js pour protéger les routes côté serveur n'est pas encore visible - à vérifier ou à implémenter si absent.
 5. **Google Sign-In** : `loginWithGoogle()` est déclarée mais non implémentée.
 6. **Tests** : Aucun fichier de test n'est présent (unitaires, intégration, e2e).

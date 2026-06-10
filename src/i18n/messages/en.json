@@ -95,7 +95,7 @@
       "availableNow": "Available Now",
       "mtnUsers": "4M+ users",
       "orangeUsers": "3M+ users",
-      "comingSoon": "More providers coming soon — Wave, Visa, Mastercard & more"
+      "comingSoon": "More providers coming soon - Wave, Visa, Mastercard & more"
     },
     "WhyChoose": {
       "badge": "Benefits",
@@ -681,7 +681,7 @@
         "cancel": "Cancel",
         "confirm": "Confirm",
         "passwordUpdated": "Password updated",
-        "oauthDesc": "Connected via external account — no local password",
+        "oauthDesc": "Connected via external account - no local password",
         "genericError": "An error occurred.",
         "passwordRules": {
           "length": "Min. 8 characters",
@@ -887,7 +887,7 @@
         "logoSelectFile": "Select a file",
         "logoChangeFile": "Change file",
         "logoRemove": "Remove",
-        "logoFileTypes": "PNG, JPG, SVG or WebP — max 2 MB",
+        "logoFileTypes": "PNG, JPG, SVG or WebP - max 2 MB",
         "logoDefaultCaption": "The SharePay logo will be used by default.",
         "thankYouLabel": "Thank you message",
         "thankYouPlaceholder": "Ex: Thank you for your contribution!",
@@ -989,6 +989,7 @@
         "copyRef": "Copy reference",
         "successCopy": "Copied!",
         "descRefCopy": "The transaction reference has been copied.",
+        "descPhoneCopy": "The payer's number has been copied.",
         "filterPlaceholder": "Filter by client, reference…",
         "statusAll": "All statuses",
         "statusSuccess": "Success",
@@ -1143,7 +1144,7 @@
           "logoSelectFile": "Select a file",
           "logoChangeFile": "Change file",
           "logoRemove": "Remove",
-          "logoFileTypes": "PNG, JPG, SVG or WebP — max 2 MB",
+          "logoFileTypes": "PNG, JPG, SVG or WebP - max 2 MB",
           "logoDefaultCaption": "The SharePay logo will be used by default.",
           "logoUrlHint": "Enter the full URL of your logo (optional).",
           "logoUrlInvalid": "Invalid URL. It must start with http:// or https://.",
@@ -1177,7 +1178,7 @@
           "downloaded": "File downloaded!",
           "confirmSaved": "I have saved my secrets somewhere safe",
           "confirmOnce": "Please confirm that you have saved this information.",
-          "confirmFinal": "Yes, I’ve saved them — Continue",
+          "confirmFinal": "Yes, I’ve saved them - Continue",
           "keyCreated": "Your API key has been created successfully."
         },
         "APIKeys": {
@@ -1247,7 +1248,7 @@
             "rotating": "Rotating…",
             "revokeButton": "Revoke",
             "revoking": "Revoking…",
-            "createSuccess": "Secret created. Save it now — it won't be shown again.",
+            "createSuccess": "Secret created. Save it now - it won't be shown again.",
             "rotateSuccess": "Secret rotated. Previous secret is revoked.",
             "revokeSuccess": "Webhook secret revoked.",
             "copied": "Copied!",
@@ -1599,9 +1600,9 @@
     "Billing": {
       "title": "Billing & Fees",
       "q1": "Are there monthly or setup fees?",
-      "a1": "No. SharePay operates on a pure pay-per-use model. You only pay a small percentage per successful transaction — no monthly fees, no setup fees, no hidden charges.",
+      "a1": "No. SharePay operates on a pure pay-per-use model. You only pay a small percentage per successful transaction - no monthly fees, no setup fees, no hidden charges.",
       "q2": "What is the transaction fee?",
-      "a2": "The standard rate is 1.5% per transaction for Mobile Money. Volume discounts are available for high-traffic merchants — contact us for a custom quote.",
+      "a2": "The standard rate is 1.5% per transaction for Mobile Money. Volume discounts are available for high-traffic merchants - contact us for a custom quote.",
       "q3": "When are funds available after a payment?",
       "a3": "Funds are typically available for payout within 24 hours of a successful transaction, subject to your configured payout schedule.",
       "q4": "Can I change my pricing plan at any time?",

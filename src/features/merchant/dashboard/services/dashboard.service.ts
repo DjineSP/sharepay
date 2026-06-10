@@ -5,13 +5,13 @@ import { ChartGroupBy, ChartInterval, MerchantDashboardData, TransactionChartDat
 
 export const dashboardService = {
 
-    /** GET /merchants/dashboard — Tableau de bord du marchand connecté */
+    /** GET /merchants/dashboard - Tableau de bord du marchand connecté */
     async getMerchantDashboard(): Promise<MerchantDashboardData> {
         const response = await client.get<ApiResponse<MerchantDashboardData>>("/api/v1/merchants/dashboard");
         return parseApiResponse(response.data, response.status)!;
     },
 
-    /** GET /merchants/transactions/chart — Données du graphique de transactions */
+    /** GET /merchants/transactions/chart - Données du graphique de transactions */
     async getTransactionChart(interval: ChartInterval, groupBy: ChartGroupBy): Promise<TransactionChartData> {
         const response = await client.get<ApiResponse<TransactionChartData>>(
             "/api/v1/merchants/transactions/chart",

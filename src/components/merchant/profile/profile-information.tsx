@@ -113,7 +113,7 @@ function ProfileInformationForm({ profile, onProfileUpdate }: { profile: Merchan
                         />
                     </div>
 
-                    {/* Email — lecture seule */}
+                    {/* Email - lecture seule */}
                     <div className="space-y-2 md:col-span-2">
                         <Label>{t("email")}</Label>
                         <div className="relative">

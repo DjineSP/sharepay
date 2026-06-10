@@ -143,11 +143,26 @@ export function TransactionsTable({
                 return (
                     <div className="min-w-[110px]">
                         <p className="text-sm font-medium text-foreground leading-tight">
-                            {tx.payerName ?? "—"}
+                            {tx.payerName ?? "-"}
                         </p>
-                        <p className="hidden sm:block text-xs text-muted-foreground font-mono leading-tight mt-0.5">
-                            {tx.payerAccount ?? "—"}
-                        </p>
+                        <div className="hidden sm:flex items-center gap-1 mt-0.5 min-w-0">
+                            <p className="text-xs text-muted-foreground font-mono leading-tight truncate">
+                                {tx.payerAccount ?? "-"}
+                            </p>
+                            {tx.payerAccount && (
+                                <button
+                                    type="button"
+                                    className="text-muted-foreground hover:text-foreground transition-colors shrink-0"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        navigator.clipboard.writeText(tx.payerAccount!);
+                                        toast.success(t("successCopy"), { description: t("descPhoneCopy") });
+                                    }}
+                                >
+                                    <Copy className="h-3 w-3" />
+                                </button>
+                            )}
+                        </div>
                     </div>
                 );
             },
@@ -158,7 +173,7 @@ export function TransactionsTable({
             meta: { className: "hidden md:table-cell" },
             cell: ({ row }) => {
                 const p = row.getValue<string | null>("provider");
-                if (!p) return <span className="text-muted-foreground text-sm">—</span>;
+                if (!p) return <span className="text-muted-foreground text-sm">-</span>;
                 return <span className="text-sm font-medium whitespace-nowrap">{p}</span>;
             },
         },

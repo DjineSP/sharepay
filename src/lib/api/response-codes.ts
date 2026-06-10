@@ -5,10 +5,10 @@ export function isApiError(error: unknown): error is ApiError {
 }
 
 // ---------------------------------------------------------------------------
-// Codes d'ERREUR — codes exacts retournés par le backend
+// Codes d'ERREUR - codes exacts retournés par le backend
 // ---------------------------------------------------------------------------
 const ERROR_CODE_MAP: Record<string, string> = {
-    // ── Auth — AuthServiceImpl ───────────────────────────────────────────────
+    // ── Auth - AuthServiceImpl ───────────────────────────────────────────────
     INVALID_CREDENTIALS:        "invalid_credentials",
     USER_NOT_FOUND:             "user_not_found",
     EMAIL_ALREADY_EXISTS:       "email_exists",
@@ -24,12 +24,12 @@ const ERROR_CODE_MAP: Record<string, string> = {
     INVALID_TOKEN_TYPE:         "invalid_token",
     INVALID_RESET_TOKEN:        "invalid_reset_token",
 
-    // ── JWT filter — JwtAuthenticationFilter ─────────────────────────────────
+    // ── JWT filter - JwtAuthenticationFilter ─────────────────────────────────
     INVALID_TOKEN:              "invalid_token",
     TOKEN_EXPIRED:              "session_expired",
     UNEXPECTED_ERROR_OCCURRED:  "internal_server_error",
 
-    // ── API Key filter — ApiKeyAuthenticationFilter ───────────────────────────
+    // ── API Key filter - ApiKeyAuthenticationFilter ───────────────────────────
     API_KEY_MISSING:            "api_key_missing",
     API_KEY_INVALID:            "api_key_invalid",
     API_KEY_REVOKED:            "api_key_revoked",
@@ -37,12 +37,12 @@ const ERROR_CODE_MAP: Record<string, string> = {
     // ── Rate limiting ─────────────────────────────────────────────────────────
     TOO_MANY_REQUESTS:          "too_many_requests",
 
-    // ── Applications — ApplicationServiceImpl ────────────────────────────────
+    // ── Applications - ApplicationServiceImpl ────────────────────────────────
     APP_NOT_FOUND:              "app_not_found",
     APP_NAME_ALREADY_EXISTS:    "app_name_duplicate",  // code réel du backend
     APP_ACCESS_DENIED:          "access_denied",
 
-    // ── Clés API — ApiKeyServiceImpl ─────────────────────────────────────────
+    // ── Clés API - ApiKeyServiceImpl ─────────────────────────────────────────
     API_KEY_NOT_FOUND:          "api_key_not_found",
     API_KEY_ALREADY_ACTIVE:     "api_key_already_active",
 
@@ -54,7 +54,7 @@ const ERROR_CODE_MAP: Record<string, string> = {
     AMOUNT_ABOVE_MAXIMUM:       "amount_above_maximum",
     INSUFFICIENT_BALANCE:       "insufficient_balance",
 
-    // ── Collectes de fonds — FundCollectionServiceImpl ───────────────────────
+    // ── Collectes de fonds - FundCollectionServiceImpl ───────────────────────
     COLLECTION_NOT_FOUND:       "collection_not_found",
     COLLECTION_NOT_EDITABLE:    "collection_not_editable",
     COLLECTION_ALREADY_CLOSED:  "collection_already_closed",
@@ -62,7 +62,7 @@ const ERROR_CODE_MAP: Record<string, string> = {
     COLLECTION_NOT_AVAILABLE:   "collection_not_available",
     AMOUNT_REQUIRED_FOR_FIXED:  "amount_required",
 
-    // ── Checkout public — PaymentPublicController ────────────────────────────
+    // ── Checkout public - PaymentPublicController ────────────────────────────
     SESSION_NOT_FOUND:          "session_not_found",
     INVALID_SESSION:            "invalid_session",
     SESSION_ALREADY_PROCESSED:  "session_already_processed",
@@ -114,7 +114,7 @@ export function getErrorMessageKey(code: string): string {
 }
 
 // ---------------------------------------------------------------------------
-// Helper — résout l'erreur en clé i18n + valeurs d'interpolation
+// Helper - résout l'erreur en clé i18n + valeurs d'interpolation
 // À utiliser dans les catch de toutes les pages.
 //
 //   const { messageKey, values } = resolveError(error);
@@ -140,7 +140,7 @@ export function resolveError(error: unknown): {
 }
 
 // ---------------------------------------------------------------------------
-// Codes de SUCCÈS — clés → section `Auth.Success.*` de l'i18n
+// Codes de SUCCÈS - clés → section `Auth.Success.*` de l'i18n
 // ---------------------------------------------------------------------------
 
 /** Clés de succès pour chaque opération d'authentification. */

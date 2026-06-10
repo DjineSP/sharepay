@@ -443,7 +443,7 @@ function RequestPanel({
                 <div className="flex items-start gap-2.5 bg-emerald-500/10 border border-emerald-500/25 rounded-xl px-3 py-2.5">
                     <span className="mt-px h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
                     <p className="text-[11px] text-emerald-700 dark:text-emerald-400 leading-relaxed">
-                        <strong>Mode Live</strong> — les requêtes sont envoyées à l'API réelle.
+                        <strong>Mode Live</strong> - les requêtes sont envoyées à l'API réelle.
                         La clé API est obligatoire.
                     </p>
                 </div>
@@ -803,7 +803,7 @@ export function ApiLabPage() {
 
             {/* Main area */}
             <div className="flex flex-1 min-h-0 overflow-hidden">
-                {/* Left — endpoint list */}
+                {/* Left - endpoint list */}
                 <aside className="hidden md:block w-52 shrink-0 border-r bg-background overflow-y-auto">
                     <EndpointList selectedId={selectedId} onSelect={setSelectedId} />
                 </aside>

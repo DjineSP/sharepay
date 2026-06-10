@@ -144,7 +144,7 @@ function DeliveriesTable({ appId }: { appId: string }) {
                             <tr key={d.id} className="hover:bg-muted/20 transition-colors">
                                 <td className="px-4 py-2.5 font-mono text-xs">{d.eventName}</td>
                                 <td className="px-4 py-2.5"><DeliveryStatusBadge status={d.status} /></td>
-                                <td className="px-4 py-2.5 text-muted-foreground">{d.httpStatus ?? "—"}</td>
+                                <td className="px-4 py-2.5 text-muted-foreground">{d.httpStatus ?? "-"}</td>
                                 <td className="px-4 py-2.5 text-muted-foreground">{d.attemptCount}</td>
                                 <td className="px-4 py-2.5 text-muted-foreground text-xs">
                                     {new Date(d.createdAt).toLocaleString()}

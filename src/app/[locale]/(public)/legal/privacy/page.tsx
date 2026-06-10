@@ -8,7 +8,7 @@ export default function PrivacyPage() {
           Politique de Confidentialité
         </h1>
         <p className="text-sm text-muted-foreground mb-2 font-medium uppercase tracking-wide">
-          SharePay — Vie Privée
+          SharePay - Vie Privée
         </p>
         <p className="text-muted-foreground mb-12 leading-relaxed">
           Dernière mise à jour : 13 Mai 2026. La présente Politique de

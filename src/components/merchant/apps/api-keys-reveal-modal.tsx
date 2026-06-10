@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 interface ApiKeysRevealModalProps {
-    webhookSecret?: string;  // plainTextWebhookSecret — visible once at creation
-    apiKey?: string;         // full API key — visible once at generation/rotation
+    webhookSecret?: string;  // plainTextWebhookSecret - visible once at creation
+    apiKey?: string;         // full API key - visible once at generation/rotation
     subtitle?: string;       // override the subtitle line
     onConfirm: () => void;
 }
@@ -33,7 +33,7 @@ export function ApiKeysRevealModal({ webhookSecret, apiKey, subtitle, onConfirm 
     };
 
     const download = () => {
-        const lines: string[] = ["SharePay — Secrets\n==================\n"];
+        const lines: string[] = ["SharePay - Secrets\n==================\n"];
         if (webhookSecret) lines.push(`Webhook Secret:\n${webhookSecret}`);
         if (apiKey) lines.push(`\nAPI Key:\n${apiKey}`);
         lines.push("\n\n⚠️  Ne partagez jamais ces informations. Ne les committez pas dans votre code source.");

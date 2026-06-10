@@ -144,7 +144,7 @@ export function CountrySelect({ value, onChange, className, disabled }: CountryS
                             </span>
                         </>
                     ) : normalizedValue ? (
-                        // Backend returned a code we don't recognise — show it raw
+                        // Backend returned a code we don't recognise - show it raw
                         <span className="text-muted-foreground">{normalizedValue}</span>
                     ) : (
                         <span className="text-muted-foreground">Sélectionner un pays</span>

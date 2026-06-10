@@ -11,7 +11,7 @@ export const client = axios.create({
 });
 
 /*
-    Refresh Token Queue — anti-race condition.
+    Refresh Token Queue - anti-race condition.
     Si 3 requêtes reçoivent un 401 simultanément, seul le 1er lance le refresh.
     Les autres attendent dans la file et reprennent avec le nouveau token.
 */

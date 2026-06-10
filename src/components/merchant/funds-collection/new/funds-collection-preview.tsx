@@ -141,7 +141,7 @@ export function FundsCollectionPreview({ data }: PaymentPreviewProps) {
                                             <span className="text-base font-black" style={{ color: COLOR }}>
                                                 {data.amountValue > 0
                                                     ? data.amountValue.toLocaleString('fr-FR')
-                                                    : '—'
+                                                    : '-'
                                                 }{' '}
                                                 <span className="text-xs">{data.currency}</span>
                                             </span>

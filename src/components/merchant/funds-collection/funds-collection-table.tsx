@@ -14,6 +14,7 @@ import {
     useReactTable,
 } from "@tanstack/react-table";
 import { Copy, ExternalLink, Search, RefreshCw, Link2, SlidersHorizontal, X } from "lucide-react";
+import { QrCodeDialog } from "@/components/merchant/funds-collection/qr-code-dialog";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { useRouter, Link } from "@/i18n/routing";
@@ -149,6 +150,17 @@ export function FundsCollectionTable({ data, onRefresh, isLoading = false }: Fun
             },
         },
         {
+            id: "qr",
+            header: "QR Code",
+            meta: { className: "hidden xl:table-cell text-center" },
+            cell: ({ row }) => (
+                <div className="flex justify-center" onClick={(e) => e.stopPropagation()}>
+                    <QrCodeDialog url={row.original.collectUrl} title={row.original.title} />
+                </div>
+            ),
+            enableSorting: false,
+        },
+        {
             accessorKey: "status",
             header: t("status"),
             cell: ({ row }) => {
@@ -264,6 +276,7 @@ export function FundsCollectionTable({ data, onRefresh, isLoading = false }: Fun
                                     <TableCell className="hidden sm:table-cell"><Skeleton className="h-4 w-24" /></TableCell>
                                     <TableCell className="hidden md:table-cell"><Skeleton className="h-4 w-20" /></TableCell>
                                     <TableCell className="hidden lg:table-cell"><Skeleton className="h-4 w-48" /></TableCell>
+                                    <TableCell className="hidden xl:table-cell"><Skeleton className="h-7 w-7 rounded-md mx-auto" /></TableCell>
                                     <TableCell><Skeleton className="h-5 w-16 rounded-full" /></TableCell>
                                 </TableRow>
                             ))}

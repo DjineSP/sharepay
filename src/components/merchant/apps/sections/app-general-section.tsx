@@ -120,7 +120,7 @@ export function AppGeneralSection({
                     {websiteUrlError && <p className="text-xs text-destructive">{t("websiteUrlInvalid")}</p>}
                 </div>
 
-                {/* Currency — always read-only */}
+                {/* Currency - always read-only */}
                 <div className="space-y-2">
                     <div className="flex items-center gap-1.5">
                         <Label>

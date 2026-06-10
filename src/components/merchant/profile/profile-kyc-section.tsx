@@ -70,7 +70,7 @@ function VerifRow({
 
             <div className="flex-1 min-w-0">
                 <p className="text-sm font-semibold">{label}</p>
-                <p className="text-xs text-muted-foreground truncate">{value || "—"}</p>
+                <p className="text-xs text-muted-foreground truncate">{value || "-"}</p>
             </div>
 
             <div className="flex items-center gap-2 shrink-0">

@@ -40,7 +40,7 @@ export const tokenStorage = {
         if (!accessToken || !refreshToken) {
             // Cookie may survive sessionStorage being cleared (browser session restore).
             // Clear it here so the middleware doesn't redirect to the dashboard when there
-            // are no tokens — which would cause an infinite redirect loop.
+            // are no tokens - which would cause an infinite redirect loop.
             document.cookie = "sharepay_session=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=Strict";
             return null;
         }
