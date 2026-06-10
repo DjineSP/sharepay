@@ -445,7 +445,7 @@ export function MerchantDocsPage() {
         <CollapseCtx.Provider value={{ collapsed, toggle }}>
         <style dangerouslySetInnerHTML={{ __html: PRINT_STYLES }} />
         <div className="-m-6 md:-m-8 flex h-[calc(100vh-4rem)] overflow-hidden print:h-auto print:block">
-            {/* Left sidebar — desktop */}
+            {/* Left sidebar - desktop */}
             <aside className="hidden md:block w-52 shrink-0 border-r bg-background overflow-y-auto">
                 <Sidebar />
             </aside>
@@ -469,7 +469,7 @@ export function MerchantDocsPage() {
 
             {/* Main content */}
             <main className="flex-1 min-w-0 overflow-y-auto print:overflow-visible">
-                {/* Top bar — mobile nav + PDF button */}
+                {/* Top bar - mobile nav + PDF button */}
                 <div className="sticky top-0 z-10 bg-background/95 backdrop-blur-sm border-b px-4 py-2 flex items-center gap-2 print:hidden">
                     <button
                         onClick={() => setMobileOpen(true)}
@@ -530,9 +530,9 @@ export function MerchantDocsPage() {
                         </div>
                         <div className="grid sm:grid-cols-2 gap-3">
                             {[
-                                { emoji: "✅", title: "Pay-In — Checkout", desc: "Générez un lien de paiement et redirigez le client vers la page de paiement hébergée." },
-                                { emoji: "⚡", title: "Pay-In — Charge", desc: "Initiez un débit direct sur le compte mobile du client sans page web intermédiaire." },
-                                { emoji: "💸", title: "Pay-Out — Transfer", desc: "Envoyez des fonds vers un bénéficiaire via Mobile Money." },
+                                { emoji: "✅", title: "Pay-In - Checkout", desc: "Générez un lien de paiement et redirigez le client vers la page de paiement hébergée." },
+                                { emoji: "⚡", title: "Pay-In - Charge", desc: "Initiez un débit direct sur le compte mobile du client sans page web intermédiaire." },
+                                { emoji: "💸", title: "Pay-Out - Transfer", desc: "Envoyez des fonds vers un bénéficiaire via Mobile Money." },
                                 { emoji: "🔔", title: "Webhooks", desc: "Recevez des notifications en temps réel sur l'état de chaque transaction." },
                             ].map((item) => (
                                 <div key={item.title} className="rounded-xl border p-4 space-y-1.5">
@@ -638,9 +638,9 @@ export function MerchantDocsPage() {
                                         { http: "400", code: "VALIDATION_ERROR", desc: "Corps de la requête invalide ou champs manquants" },
                                         { http: "401", code: "UNAUTHORIZED", desc: "Clé API absente, invalide ou révoquée" },
                                         { http: "404", code: "NOT_FOUND", desc: "Ressource introuvable (référence inexistante)" },
-                                        { http: "409", code: "DUPLICATE_REQUEST", desc: "Même idempotencyKey déjà traitée — doublon évité" },
+                                        { http: "409", code: "DUPLICATE_REQUEST", desc: "Même idempotencyKey déjà traitée - doublon évité" },
                                         { http: "422", code: "INSUFFICIENT_BALANCE", desc: "Solde insuffisant pour effectuer ce virement" },
-                                        { http: "429", code: "RATE_LIMIT_EXCEEDED", desc: "Limite de requêtes atteinte — attendez avant de réessayer" },
+                                        { http: "429", code: "RATE_LIMIT_EXCEEDED", desc: "Limite de requêtes atteinte - attendez avant de réessayer" },
                                         { http: "500", code: "INTERNAL_ERROR", desc: "Erreur interne serveur" },
                                     ].map((e) => (
                                         <tr key={e.code} className="hover:bg-muted/30 transition-colors">
@@ -655,7 +655,7 @@ export function MerchantDocsPage() {
                     </Section>
 
                     {/* Pay-In: Checkout */}
-                    <Section id="payin-checkout" title="Pay-In — Checkout">
+                    <Section id="payin-checkout" title="Pay-In - Checkout">
                         <EndpointHeader
                             method="POST"
                             path="/api/v1/pay-in/checkout"
@@ -705,7 +705,7 @@ export function MerchantDocsPage() {
                     </Section>
 
                     {/* Pay-In: Charge */}
-                    <Section id="payin-charge" title="Pay-In — Charge directe">
+                    <Section id="payin-charge" title="Pay-In - Charge directe">
                         <EndpointHeader
                             method="POST"
                             path="/api/v1/pay-in/charge"
@@ -731,7 +731,7 @@ export function MerchantDocsPage() {
                         </div>
                         <FieldTable title="Réponse (data)" fields={[
                             { name: "reference", type: "string", description: "Référence unique", example: "PI-A1B2C3D4E5F6" },
-                            { name: "status", type: '"PROCESSING"', description: "Statut initial — traitement en cours" },
+                            { name: "status", type: '"PROCESSING"', description: "Statut initial - traitement en cours" },
                             { name: "amount", type: "integer", description: "Montant" },
                             { name: "currency", type: "string", description: "Devise" },
                             { name: "paymentMethod", type: "string", description: "Provider utilisé" },
@@ -768,7 +768,7 @@ export function MerchantDocsPage() {
                     </Section>
 
                     {/* Pay-In: Status */}
-                    <Section id="payin-status" title="Pay-In — Vérifier le statut">
+                    <Section id="payin-status" title="Pay-In - Vérifier le statut">
                         <EndpointHeader
                             method="GET"
                             path="/api/v1/pay-in/check_status/{reference}"
@@ -812,11 +812,11 @@ export function MerchantDocsPage() {
                     </Section>
 
                     {/* Pay-Out: Transfer */}
-                    <Section id="payout-transfer" title="Pay-Out — Virement">
+                    <Section id="payout-transfer" title="Pay-Out - Virement">
                         <EndpointHeader
                             method="POST"
                             path="/api/v1/pay-out/transfer"
-                            description="Crée un virement vers un bénéficiaire. Le montant est débité de votre solde disponible. La transaction passe immédiatement en PROCESSING — le résultat définitif est notifié par webhook."
+                            description="Crée un virement vers un bénéficiaire. Le montant est débité de votre solde disponible. La transaction passe immédiatement en PROCESSING - le résultat définitif est notifié par webhook."
                         />
                         <FieldTable title="Corps de la requête" fields={[
                             { name: "amount", type: "integer", required: true, description: "Montant à envoyer", example: "10000" },
@@ -866,7 +866,7 @@ export function MerchantDocsPage() {
                     </Section>
 
                     {/* Pay-Out: Status */}
-                    <Section id="payout-status" title="Pay-Out — Vérifier le statut">
+                    <Section id="payout-status" title="Pay-Out - Vérifier le statut">
                         <EndpointHeader
                             method="GET"
                             path="/api/v1/pay-out/check_status/{reference}"
@@ -977,13 +977,13 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
 });`} />
                     </Section>
 
-                    {/* ── SDK — JavaScript ──────────────────────────── */}
-                    <Section id="sdk-js" title="SDK — JavaScript / Node.js">
+                    {/* ── SDK - JavaScript ──────────────────────────── */}
+                    <Section id="sdk-js" title="SDK - JavaScript / Node.js">
                         <p className="text-sm text-muted-foreground leading-relaxed">
                             Exemple d'intégration avec <code className="text-xs font-mono bg-muted px-1.5 py-0.5 rounded">axios</code> pour Node.js / navigateur.
                             Installez-le avec <code className="text-xs font-mono bg-muted px-1.5 py-0.5 rounded">npm install axios</code>.
                         </p>
-                        <CodeBlock lang="javascript" code={`// sharepay.js — client minimal
+                        <CodeBlock lang="javascript" code={`// sharepay.js - client minimal
 const axios = require('axios');
 
 const client = axios.create({
@@ -1037,8 +1037,8 @@ async function createTransfer({ amount, currency, paymentMethod, beneficiaryAcco
 })();`} />
                     </Section>
 
-                    {/* ── SDK — PHP ─────────────────────────────────────── */}
-                    <Section id="sdk-php" title="SDK — PHP">
+                    {/* ── SDK - PHP ─────────────────────────────────────── */}
+                    <Section id="sdk-php" title="SDK - PHP">
                         <p className="text-sm text-muted-foreground leading-relaxed">
                             Exemple d'intégration en PHP natif avec <code className="text-xs font-mono bg-muted px-1.5 py-0.5 rounded">cURL</code>.
                             Compatible PHP 7.4+.
@@ -1121,13 +1121,13 @@ header('Location: ' . $session['paymentUrl']);
 exit;`} />
                     </Section>
 
-                    {/* ── SDK — Python ──────────────────────────────────── */}
-                    <Section id="sdk-python" title="SDK — Python">
+                    {/* ── SDK - Python ──────────────────────────────────── */}
+                    <Section id="sdk-python" title="SDK - Python">
                         <p className="text-sm text-muted-foreground leading-relaxed">
                             Exemple d'intégration avec <code className="text-xs font-mono bg-muted px-1.5 py-0.5 rounded">requests</code>.
                             Installez-le avec <code className="text-xs font-mono bg-muted px-1.5 py-0.5 rounded">pip install requests</code>.
                         </p>
-                        <CodeBlock lang="python" code={`# sharepay.py — client minimal
+                        <CodeBlock lang="python" code={`# sharepay.py - client minimal
 import os
 import requests
 

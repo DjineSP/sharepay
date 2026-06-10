@@ -189,7 +189,7 @@ export function WithdrawalsConfigModal({ open, onClose, onSaved }: WithdrawalsCo
                                         </div>
                                     </label>
 
-                                    {/* Champs supplémentaires — visibles uniquement si sélectionné */}
+                                    {/* Champs supplémentaires - visibles uniquement si sélectionné */}
                                     {selected === mode && mode !== "MANUAL" && (
                                         <div className="mt-4 ml-7 space-y-3">
                                             {mode === "THRESHOLD" && (

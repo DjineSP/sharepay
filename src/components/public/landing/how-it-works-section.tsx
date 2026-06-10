@@ -46,7 +46,7 @@ export function HowItWorksSection() {
 
                 {/* Steps grid */}
                 <div className="relative">
-                    {/* Connecting line — desktop only */}
+                    {/* Connecting line - desktop only */}
                     <div className="absolute top-7 left-[calc(16.67%+1.75rem)] right-[calc(16.67%+1.75rem)] h-px bg-gradient-to-r from-emerald-500/50 via-emerald-500/20 to-emerald-500/50 hidden md:block" />
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

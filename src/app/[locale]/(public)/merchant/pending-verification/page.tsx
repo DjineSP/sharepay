@@ -94,7 +94,7 @@ export default function PendingVerificationPage() {
                         </Avatar>
                     </div>
 
-                    {/* Details — pulled up over the band */}
+                    {/* Details - pulled up over the band */}
                     <div className="-mt-6 mx-4 mb-4 rounded-xl bg-card border shadow-sm px-5 py-4 space-y-4">
                         <div className="text-center">
                             <p className="font-bold text-lg leading-tight">{user!.fullName}</p>

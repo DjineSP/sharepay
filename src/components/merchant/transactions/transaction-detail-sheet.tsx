@@ -102,7 +102,7 @@ export function TransactionDetailSheet({ transaction, open, onClose }: Transacti
                         : "w-full sm:w-[480px] sm:max-w-[480px] flex flex-col p-0"
                 }
             >
-                {/* Drag handle — mobile only */}
+                {/* Drag handle - mobile only */}
                 {isMobile && (
                     <div className="flex justify-center pt-3 pb-1 shrink-0">
                         <div className="w-10 h-1.5 rounded-full bg-muted-foreground/25" />
@@ -189,12 +189,12 @@ export function TransactionDetailSheet({ transaction, open, onClose }: Transacti
                                     </InfoRow>
                                     <InfoRow label={t("labelFees")}>
                                         <span className={`text-sm ${transaction.feeAmount > 0 ? "text-destructive" : "text-muted-foreground"}`}>
-                                            {transaction.feeAmount > 0 ? `− ${fmt(transaction.feeAmount)}` : "—"}
+                                            {transaction.feeAmount > 0 ? `− ${fmt(transaction.feeAmount)}` : "-"}
                                         </span>
                                     </InfoRow>
                                     <InfoRow label={t("labelNetAmount")}>
                                         <span className={`font-bold text-sm ${transaction.netAmount > 0 ? "text-emerald-600 dark:text-emerald-400" : "text-muted-foreground"}`}>
-                                            {transaction.netAmount > 0 ? fmt(transaction.netAmount) : "—"}
+                                            {transaction.netAmount > 0 ? fmt(transaction.netAmount) : "-"}
                                         </span>
                                     </InfoRow>
                                     <InfoRow label={t("labelCurrency")}>
@@ -216,7 +216,10 @@ export function TransactionDetailSheet({ transaction, open, onClose }: Transacti
                                     )}
                                     {transaction.payerAccount && (
                                         <InfoRow label={t("labelPhone")}>
-                                            <span className="font-mono text-sm">{transaction.payerAccount}</span>
+                                            <div className="flex items-center gap-1.5 justify-end min-w-0">
+                                                <span className="font-mono text-sm truncate">{transaction.payerAccount}</span>
+                                                <CopyButton value={transaction.payerAccount} toastMsg={t("copiedId")} />
+                                            </div>
                                         </InfoRow>
                                     )}
                                     {transaction.payerEmail && (

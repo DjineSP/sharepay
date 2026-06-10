@@ -14,7 +14,7 @@ import {
 } from "@/features/auth/types";
 
 /*
-    Service d'authentification — toutes les erreurs sont des `ApiError`.
+    Service d'authentification - toutes les erreurs sont des `ApiError`.
     Consommer avec `isApiError(e)` de `@/lib/api/error-codes` pour gérer les cas.
 */
 export const authService = {
@@ -76,7 +76,7 @@ export const authService = {
     },
 
     /*
-        POST /auth/refresh-token — Le refresh automatique est géré par l'intercepteur dans client.ts.
+        POST /auth/refresh-token - Le refresh automatique est géré par l'intercepteur dans client.ts.
         Cette méthode est utile uniquement pour forcer un refresh explicitement.
     */
     async refreshToken(refreshToken: string): Promise<AuthTokenData> {
@@ -95,7 +95,7 @@ export const authService = {
     },
 
     /*
-        POST /auth/logout — Révoque le refresh token côté backend.
+        POST /auth/logout - Révoque le refresh token côté backend.
         L'access token reste valide jusqu'à son expiration (15 min max).
         Le stockage local est nettoyé dans tous les cas.
     */
@@ -112,7 +112,7 @@ export const authService = {
         }
     },
 
-    // Non implémenté — intégration OAuth Google à venir
+    // Non implémenté - intégration OAuth Google à venir
     async loginWithGoogle(): Promise<void> {
         throw new Error("Google login not yet implemented with backend");
     },

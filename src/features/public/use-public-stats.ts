@@ -8,7 +8,7 @@ export function usePublicStats() {
     useEffect(() => {
         publicStatsService.get()
             .then(setData)
-            .catch(() => { /* silently keep null — fallback values shown */ })
+            .catch(() => { /* silently keep null - fallback values shown */ })
             .finally(() => setLoading(false));
     }, []);
 

@@ -195,7 +195,7 @@ export function WithdrawalsConfigPage() {
                                             <SelectItem key={acc.id} value={acc.id}>
                                                 <span className="font-medium">{acc.providerName}</span>
                                                 <span className="text-muted-foreground ml-2 font-mono text-xs">
-                                                    {acc.accountNumber} — {acc.accountName}
+                                                    {acc.accountNumber} - {acc.accountName}
                                                 </span>
                                             </SelectItem>
                                         ))}

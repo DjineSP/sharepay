@@ -1,4 +1,4 @@
-# Architecture — Sharepay
+# Architecture - Sharepay
 
 > Documentation technique de l'architecture du projet frontend Sharepay.
 > Générée le 26 février 2026.
@@ -79,7 +79,7 @@ sharepay/
 
 Toutes les routes sont encapsulées dans le segment `[locale]` pour gérer l'internationalisation (fr/en), avec `localePrefix: 'never'` (le préfixe n'apparaît pas dans l'URL).
 
-### 4.1 Groupe `(auth)` — Pages non protégées
+### 4.1 Groupe `(auth)` - Pages non protégées
 
 | Route | Fichier | Description |
 |---|---|---|
@@ -90,7 +90,7 @@ Toutes les routes sont encapsulées dans le segment `[locale]` pour gérer l'int
 | `/verify-reset-code` | `(auth)/verify-reset-code/page.tsx` | Vérification OTP reset |
 | `/reset-password` | `(auth)/reset-password/page.tsx` | Nouveau mot de passe |
 
-### 4.2 Groupe `(dashboard)` — Routes protégées
+### 4.2 Groupe `(dashboard)` - Routes protégées
 
 | Route | Fichier | Description |
 |---|---|---|
@@ -104,7 +104,7 @@ Toutes les routes sont encapsulées dans le segment `[locale]` pour gérer l'int
 | `/dashboard/profile` | `dashboard/profile/page.tsx` | Profil utilisateur |
 | `/dashboard/settings` | `dashboard/settings/page.tsx` | Paramètres |
 
-### 4.3 Groupe `(public)` — Pages marketing
+### 4.3 Groupe `(public)` - Pages marketing
 
 | Route | Description |
 |---|---|
@@ -189,7 +189,7 @@ Gère la persistance des tokens JWT dans `localStorage` (si `rememberMe`) ou `se
 
 ## 6. Architecture des composants (`src/components/`)
 
-### 6.1 Design System — Primitives UI (`components/ui/`)
+### 6.1 Design System - Primitives UI (`components/ui/`)
 Composants de base basés sur le pattern **shadcn/ui** (Radix UI + TailwindCSS + CVA) :
 
 `avatar`, `badge`, `button`, `card`, `checkbox`, `dialog`, `dropdown-menu`, `input`, `input-otp`, `label`, `pagination`, `phone-input`, `radio-group`, `scroll-area`, `select`, `separator`, `sheet`, `table`, `tabs`, `textarea`
@@ -279,7 +279,7 @@ Composants de base basés sur le pattern **shadcn/ui** (Radix UI + TailwindCSS +
 
 - **Bibliothèque** : `next-intl` v4
 - **Locales supportées** : `fr` (défaut), `en`
-- **Stratégie de préfixe** : `localePrefix: 'never'` — les URLs ne contiennent pas le préfixe de langue
+- **Stratégie de préfixe** : `localePrefix: 'never'` - les URLs ne contiennent pas le préfixe de langue
 - **Fichiers de messages** : `src/core/i18n/messages/fr.json` (~33 Ko), `en.json` (~31 Ko)
 - **Routing** : `src/core/i18n/routing.ts` exporte `Link`, `redirect`, `usePathname`, `useRouter`, `getPathname` avec support i18n natif
 - **Configuration serveur** : `src/core/i18n/request.ts` utilisé par `next.config.ts`

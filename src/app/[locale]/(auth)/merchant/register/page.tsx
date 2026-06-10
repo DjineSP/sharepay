@@ -34,7 +34,7 @@ export default function RegisterPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    // Règles mot de passe — miroir exact du regex backend
+    // Règles mot de passe - miroir exact du regex backend
     const passwordRules = [
         { key: "length",    test: (p: string) => p.length >= 8 },
         { key: "uppercase", test: (p: string) => /[A-Z]/.test(p) },

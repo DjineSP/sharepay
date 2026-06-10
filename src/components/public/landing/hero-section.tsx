@@ -25,7 +25,7 @@ function formatStat(n: number): string {
 }
 
 // Courbe lisse pré-calculée avec Catmull-Rom tension=0.1 sur 7 points
-// viewBox 280×70 — axe Y inversé (0=haut, 70=bas)
+// viewBox 280×70 - axe Y inversé (0=haut, 70=bas)
 const CHART_LINE = "M0,57 C4,56 37,46 47,45 C57,44 84,55 93,53 C103,51 131,38 140,36 C149,34 177,43 187,41 C197,39 224,20 233,18 C243,16 275,15 280,14";
 const CHART_AREA = `${CHART_LINE} L280,70 L0,70 Z`;
 const X_LABELS   = ["26 avr", "27 avr", "28 avr", "29 avr", "30 avr", "01 mai", "02 mai"];
@@ -130,7 +130,7 @@ export function HeroSection() {
                         </motion.div>
                     </div>
 
-                    {/* Right column — glassmorphism dashboard card */}
+                    {/* Right column - glassmorphism dashboard card */}
                     <motion.div
                         initial={{ opacity: 0, x: 30 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -163,7 +163,7 @@ export function HeroSection() {
                                     </div>
                                 </div>
 
-                                {/* Line chart — même style que le vrai dashboard */}
+                                {/* Line chart - même style que le vrai dashboard */}
                                 <div className="mb-3">
                                     <svg
                                         viewBox="0 0 280 70"
@@ -202,7 +202,7 @@ export function HeroSection() {
 
                                 <div className="h-px bg-border/50 mb-3" />
 
-                                {/* Transactions récentes — même layout que le vrai dashboard */}
+                                {/* Transactions récentes - même layout que le vrai dashboard */}
                                 <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-2">
                                     {t('mockupTransactions')}
                                 </p>
@@ -240,9 +240,9 @@ export function HeroSection() {
                     className="mt-14 md:mt-20 pt-8 border-t border-border/40 grid grid-cols-3 gap-6"
                 >
                     {[
-                        { value: stats ? formatStat(stats.merchantCount)      : "—", label: t('statMerchantsLabel') },
-                        { value: stats ? formatStat(stats.transactionCount)   : "—", label: t('statTxLabel') },
-                        { value: stats ? formatStat(stats.paymentMethodCount) : "—", label: t('statMethodsLabel') },
+                        { value: stats ? formatStat(stats.merchantCount)      : "-", label: t('statMerchantsLabel') },
+                        { value: stats ? formatStat(stats.transactionCount)   : "-", label: t('statTxLabel') },
+                        { value: stats ? formatStat(stats.paymentMethodCount) : "-", label: t('statMethodsLabel') },
                     ].map(({ value, label }, i) => (
                         <div key={i} className="flex flex-col items-center text-center">
                             <span className="text-3xl sm:text-4xl md:text-5xl font-black text-foreground leading-none">

@@ -1,5 +1,5 @@
 # ============================================================
-# STAGE 1 — Dépendances
+# STAGE 1 - Dépendances
 # Installe uniquement les dépendances npm
 # ============================================================
 FROM node:22-alpine AS deps
@@ -13,7 +13,7 @@ RUN npm ci --ignore-scripts
 
 
 # ============================================================
-# STAGE 2 — Build
+# STAGE 2 - Build
 # Compile l'application Next.js en mode standalone
 # ============================================================
 FROM node:22-alpine AS builder
@@ -38,7 +38,7 @@ RUN npm run build
 
 
 # ============================================================
-# STAGE 3 — Production
+# STAGE 3 - Production
 # Image finale légère avec uniquement le build standalone
 # ============================================================
 FROM node:22-alpine AS runner
@@ -59,7 +59,7 @@ COPY --from=builder --chown=nextjs:nextjs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nextjs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nextjs /app/public ./public
 
-# Port documentaire uniquement — le vrai binding est dans docker-compose (ports:)
+# Port documentaire uniquement - le vrai binding est dans docker-compose (ports:)
 EXPOSE 3000
 
 CMD ["node", "server.js"]

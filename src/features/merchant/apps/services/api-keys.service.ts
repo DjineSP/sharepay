@@ -31,6 +31,6 @@ export const apiKeysService = {
 
     async revoke(appId: string): Promise<void> {
         await client.delete(`/api/v1/merchants/apps/${appId}/api-keys`);
-        // 204 No Content — no body to parse
+        // 204 No Content - no body to parse
     },
 };

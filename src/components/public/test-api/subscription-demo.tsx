@@ -167,7 +167,7 @@ function DirectPayForm({ amount, provider, phone, name, phoneError, onProviderCh
 
             <div className="px-6 py-6 space-y-5">
 
-                {/* Redirect button — top of form */}
+                {/* Redirect button - top of form */}
                 <Button
                     variant="outline"
                     onClick={onRedirect}

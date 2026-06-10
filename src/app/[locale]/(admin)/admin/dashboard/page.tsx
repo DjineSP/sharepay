@@ -69,7 +69,7 @@ export default function AdminDashboardPage() {
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                 <div className="xl:col-span-2 bg-card text-card-foreground rounded-xl border p-6 shadow-sm flex items-center justify-center min-h-[260px]">
-                    <p className="text-sm text-muted-foreground">Graphique des transactions — à brancher sur l'API admin</p>
+                    <p className="text-sm text-muted-foreground">Graphique des transactions - à brancher sur l'API admin</p>
                 </div>
                 <AdminActivityFeed
                     title="Alertes Système & Sécurité"

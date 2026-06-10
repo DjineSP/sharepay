@@ -31,6 +31,6 @@ export const appsService = {
 
     async remove(id: string): Promise<void> {
         await client.delete(`/api/v1/merchants/apps/${id}`);
-        // 204 No Content — no body to parse
+        // 204 No Content - no body to parse
     },
 };

@@ -204,7 +204,7 @@ function MultiSeriesChart({ data, groupBy, metric }: { data: TransactionChartDat
                     />
                 )}
 
-                {/* Series curves — clipped to chart area */}
+                {/* Series curves - clipped to chart area */}
                 <g clipPath={`url(#${clipId})`}>
                     {series.map((s, si) => {
                         const pts = seriesPoints[si];
@@ -433,7 +433,7 @@ export function OverviewTransactionChartCard() {
                                 }`}>{label}</button>
                         ))}
                     </div>
-                    {/* Période — dropdown */}
+                    {/* Période - dropdown */}
                     <div className="relative">
                         <button type="button"
                             className="h-9 inline-flex items-center gap-2 rounded-lg border border-input bg-background px-3 text-sm font-semibold text-foreground shadow-sm hover:bg-accent transition-colors"
@@ -456,7 +456,7 @@ export function OverviewTransactionChartCard() {
                             </div>
                         )}
                     </div>
-                    {/* Grouper par — dropdown */}
+                    {/* Grouper par - dropdown */}
                     <div className="relative">
                         <button type="button"
                             className="h-9 inline-flex items-center gap-2 rounded-lg border border-input bg-background px-3 text-sm font-semibold text-foreground shadow-sm hover:bg-accent transition-colors"

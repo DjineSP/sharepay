@@ -10,39 +10,39 @@ import {
 
 /**
  * Service de gestion des applications marchandes.
- * Toutes les erreurs sont des `ApiError` — utiliser `isApiError(e)` pour les gérer.
+ * Toutes les erreurs sont des `ApiError` - utiliser `isApiError(e)` pour les gérer.
  */
 export const appsService = {
 
     // ── Applications ──────────────────────────────────────────────────────────
 
-    /** GET /apps — Toutes les apps du marchand connecté */
+    /** GET /apps - Toutes les apps du marchand connecté */
     async list(): Promise<AppResponse[]> {
         const response = await client.get<ApiResponse<AppResponse[]>>("/api/v1/merchants/apps");
         return parseApiResponse(response.data, response.status) ?? [];
     },
 
-    /** GET /apps/production — Apps en environnement PRODUCTION uniquement */
+    /** GET /apps/production - Apps en environnement PRODUCTION uniquement */
     async listProduction(): Promise<AppResponse[]> {
         const response = await client.get<ApiResponse<AppResponse[]>>("/api/v1/merchants/apps/production");
         return parseApiResponse(response.data, response.status) ?? [];
     },
 
-    /** GET /apps/sandbox — Apps en environnement SANDBOX uniquement */
+    /** GET /apps/sandbox - Apps en environnement SANDBOX uniquement */
     async listSandbox(): Promise<AppResponse[]> {
         const response = await client.get<ApiResponse<AppResponse[]>>("/api/v1/merchants/apps/sandbox");
         return parseApiResponse(response.data, response.status) ?? [];
     },
 
-    /** GET /apps/{id} — Détail d'une application par son ID */
+    /** GET /apps/{id} - Détail d'une application par son ID */
     async getById(id: string): Promise<AppResponse> {
         const response = await client.get<ApiResponse<AppResponse>>(`/api/v1/merchants/apps/${id}`);
         return parseApiResponse(response.data, response.status)!;
     },
 
     /**
-     * POST /apps — Crée une nouvelle application.
-     * La réponse inclut les `apiKeys` (PUBLIC + SECRET) — visibles UNE SEULE FOIS.
+     * POST /apps - Crée une nouvelle application.
+     * La réponse inclut les `apiKeys` (PUBLIC + SECRET) - visibles UNE SEULE FOIS.
      */
     async create(data: CreateAppRequest): Promise<AppResponse> {
         const response = await client.post<ApiResponse<AppResponse>>("/api/v1/merchants/apps", data);
@@ -50,7 +50,7 @@ export const appsService = {
     },
 
     /**
-     * PUT /apps/{id} — Met à jour les champs modifiables de l'app.
+     * PUT /apps/{id} - Met à jour les champs modifiables de l'app.
      * L'environnement (PRODUCTION/SANDBOX) n'est pas modifiable après création.
      */
     async update(id: string, data: UpdateAppRequest): Promise<AppResponse> {
@@ -58,7 +58,7 @@ export const appsService = {
         return parseApiResponse(response.data, response.status)!;
     },
 
-    /** DELETE /apps/{id} — Supprime une application */
+    /** DELETE /apps/{id} - Supprime une application */
     async remove(id: string): Promise<void> {
         const response = await client.delete<ApiResponse<null>>(`/api/v1/merchants/apps/${id}`);
         parseApiResponse(response.data, response.status);
@@ -67,7 +67,7 @@ export const appsService = {
     // ── Clés API ──────────────────────────────────────────────────────────────
 
     /**
-     * GET /apps/{appId}/keys — Liste les clés API actives.
+     * GET /apps/{appId}/keys - Liste les clés API actives.
      * Note : `secretKey` n'est jamais retourné ici (uniquement à la création/rotation).
      */
     async getKeys(appId: string): Promise<ApiKeyResponse[]> {
@@ -76,7 +76,7 @@ export const appsService = {
     },
 
     /**
-     * POST /apps/{appId}/keys — Régénère toutes les clés (rotation).
+     * POST /apps/{appId}/keys - Régénère toutes les clés (rotation).
      * Révoque toutes les clés actives et en génère de nouvelles.
      * Les `secretKey` sont visibles UNE SEULE FOIS dans la réponse.
      */
@@ -85,7 +85,7 @@ export const appsService = {
         return parseApiResponse(response.data, response.status) ?? [];
     },
 
-    /** DELETE /apps/{appId}/keys/{keyId} — Révoque une clé API spécifique */
+    /** DELETE /apps/{appId}/keys/{keyId} - Révoque une clé API spécifique */
     async revokeKey(appId: string, keyId: string): Promise<void> {
         const response = await client.delete<ApiResponse<null>>(`/api/v1/merchants/apps/${appId}/keys/${keyId}`);
         parseApiResponse(response.data, response.status);

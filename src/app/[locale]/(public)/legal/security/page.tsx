@@ -47,7 +47,7 @@ export default function SecurityPage() {
           Sécurité &amp; Conformité
         </h1>
         <p className="text-sm text-muted-foreground mb-2 font-medium uppercase tracking-wide">
-          SharePay — Anti-Fraude, AML &amp; Audit
+          SharePay - Anti-Fraude, AML &amp; Audit
         </p>
         <p className="text-muted-foreground mb-14 leading-relaxed">
           Dernière mise à jour : 13 Mai 2026. SharePay s'engage à prévenir

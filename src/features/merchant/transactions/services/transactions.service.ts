@@ -5,7 +5,7 @@ import { Transaction, TransactionFilters, TransactionPage } from "@/features/mer
 
 export const transactionsService = {
 
-    /** GET /merchants/transactions — Liste paginée des transactions du marchand */
+    /** GET /merchants/transactions - Liste paginée des transactions du marchand */
     async list(filters?: TransactionFilters): Promise<TransactionPage> {
         const params = new URLSearchParams();
         if (filters?.page !== undefined) params.append("page", String(filters.page));
@@ -19,7 +19,7 @@ export const transactionsService = {
         return parseApiResponse(response.data, response.status)!;
     },
 
-    /** GET /pay-in/check_status/:reference — Détail d'une transaction via son référence */
+    /** GET /pay-in/check_status/:reference - Détail d'une transaction via son référence */
     async getByReference(reference: string): Promise<Transaction> {
         const response = await client.get<ApiResponse<Transaction>>(
             `/api/v1/pay-in/check_status/${reference}`

@@ -137,23 +137,23 @@ export default function DashboardPage() {
     const stats: OverviewStat[] = [
         {
             label: t("stats.availableBalance"),
-            value: loading ? "—" : formatAmount(dashboard?.availableBalance ?? 0, currency, locale),
+            value: loading ? "-" : formatAmount(dashboard?.availableBalance ?? 0, currency, locale),
             badge: { label: t("stats.availableBadge"), className: "text-emerald-600 bg-emerald-500/10" },
             icon: <Banknote className="h-5 w-5" />,
             iconWrapClassName: "bg-emerald-500/10 text-emerald-600",
         },
         {
             label: t("stats.pendingBalance"),
-            value: loading ? "—" : formatAmount(dashboard?.pendingBalance ?? 0, currency, locale),
+            value: loading ? "-" : formatAmount(dashboard?.pendingBalance ?? 0, currency, locale),
             badge: { label: t("stats.pendingBadge"), className: "text-amber-600 bg-amber-500/10" },
             icon: <Hourglass className="h-5 w-5" />,
             iconWrapClassName: "bg-amber-500/10 text-amber-600",
         },
         {
             label: t("stats.dailyVolume"),
-            value: loading ? "—" : formatAmount(dashboard?.dailyVolume ?? 0, currency, locale),
+            value: loading ? "-" : formatAmount(dashboard?.dailyVolume ?? 0, currency, locale),
             badge: {
-                label: loading ? "—" : t("stats.txnCount", { count: dashboard?.todayTransactionCount ?? 0 }),
+                label: loading ? "-" : t("stats.txnCount", { count: dashboard?.todayTransactionCount ?? 0 }),
                 className: "text-primary bg-primary/10",
             },
             icon: <Activity className="h-5 w-5" />,

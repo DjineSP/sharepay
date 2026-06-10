@@ -53,7 +53,7 @@ export function AppsGrid({ applications, onSettingsClick, onRefresh, isLoading =
 
     return (
         <div className="space-y-6">
-            {/* ── Filters Bar — always visible ──────────────────────────────── */}
+            {/* ── Filters Bar - always visible ──────────────────────────────── */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                 {/* Left block: Search + Refresh */}
                 <div className="flex items-center gap-2 flex-1 min-w-0 max-w-md">
@@ -119,7 +119,7 @@ export function AppsGrid({ applications, onSettingsClick, onRefresh, isLoading =
                     ))}
                 </div>
             ) : !hasApps ? (
-                /* Empty — no apps at all */
+                /* Empty - no apps at all */
                 <div className="flex flex-col items-center justify-center py-20 px-6 border-2 border-dashed rounded-2xl border-border bg-muted/5 text-center">
                     <div className="relative mb-6">
                         <div className="h-20 w-20 rounded-2xl bg-primary/10 flex items-center justify-center">
@@ -137,7 +137,7 @@ export function AppsGrid({ applications, onSettingsClick, onRefresh, isLoading =
                     </Button>
                 </div>
             ) : filteredAndSortedApps.length === 0 ? (
-                /* Empty — filters returned nothing */
+                /* Empty - filters returned nothing */
                 <div className="flex flex-col items-center justify-center py-16 px-6 border rounded-2xl border-border bg-muted/5 text-center">
                     <div className="h-12 w-12 rounded-xl bg-muted flex items-center justify-center mb-4">
                         <SlidersHorizontal className="h-6 w-6 text-muted-foreground" />
