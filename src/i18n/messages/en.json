@@ -944,6 +944,8 @@
     "Transactions": {
       "title": "Transactions",
       "subtitle": "History and tracking of all your transactions.",
+      "tabIn": "Entries",
+      "tabOut": "Exits",
       "Stats": {
         "success": "Successful",
         "successRate": "success rate",
@@ -975,13 +977,23 @@
         "seriesCancelled": "Cancelled",
         "seriesRefunded": "Refunded",
         "seriesMTN": "MTN Mobile Money",
-        "seriesOrange": "Orange Money"
+        "seriesOrange": "Orange Money",
+        "thisWeek": "This week",
+        "thisMonth": "This month",
+        "customYear": "By year",
+        "customDays": "Date range",
+        "yearInputLabel": "Year",
+        "fromInputLabel": "From",
+        "toInputLabel": "To",
+        "apply": "Apply"
       },
       "Table": {
         "reference": "Reference",
         "type": "Type",
         "client": "Client",
         "provider": "Provider",
+        "application": "Application",
+        "beneficiary": "Beneficiary",
         "amount": "Amount",
         "status": "Status",
         "date": "Date",
@@ -1011,10 +1023,16 @@
         "next": "Next",
         "typeCheckout": "Checkout",
         "typeCharge": "Direct charge",
-        "typeFundCollection": "Fund collection"
+        "typeFundCollection": "Fund collection",
+        "filterFrom": "Start date",
+        "filterTo": "End date",
+        "clearDates": "Clear dates",
+        "appAll": "All applications"
       },
       "Detail": {
         "title": "Transaction details",
+        "titleIn": "Pay-in details",
+        "titleOut": "Pay-out details",
         "copiedId": "Copied!",
         "sectionGeneral": "General information",
         "sectionAmounts": "Amounts",
@@ -1049,7 +1067,17 @@
         "typeCharge": "Direct charge",
         "typeFundCollection": "Fund collection",
         "labelMerchantRef": "Merchant ref.",
-        "labelDescription": "Description"
+        "labelDescription": "Description",
+        "sectionFailure": "Failure details",
+        "sectionBeneficiary": "Beneficiary",
+        "labelFailureReason": "Failure reason",
+        "labelFailureCode": "Error code",
+        "labelCustomerName": "Customer name",
+        "labelCustomerEmail": "Customer email",
+        "labelCustomerPhone": "Customer phone",
+        "labelExpiry": "Expiry",
+        "labelBeneficiary": "Beneficiary",
+        "labelBeneficiaryAccount": "Beneficiary account"
       }
     },
     "Apps": {

@@ -21,7 +21,6 @@ import { fr } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { CalendarIcon } from "lucide-react";
 import {
     Table,
     TableBody,
@@ -38,7 +37,12 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { Transaction, TransactionFilters, TransactionPage, TransactionStatus, TransactionType } from "@/features/merchant/transactions/types";
+import {
+    TransactionOut,
+    TransactionOutFilters,
+    TransactionOutPage,
+    TransactionStatus,
+} from "@/features/merchant/transactions/types";
 import { useApps } from "@/features/merchant/apps/hooks/use-apps";
 
 declare module "@tanstack/react-table" {
@@ -48,8 +52,6 @@ declare module "@tanstack/react-table" {
     }
 }
 
-// ── Status styles ─────────────────────────────────────────────────────────────
-
 const STATUS_STYLE: Record<TransactionStatus, string> = {
     SUCCESS:   "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 border-0",
     PENDING:   "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border-0",
@@ -58,52 +60,37 @@ const STATUS_STYLE: Record<TransactionStatus, string> = {
     REFUNDED:  "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border-0",
 };
 
-// ── Props ─────────────────────────────────────────────────────────────────────
-
-interface TransactionsTableProps {
-    data: TransactionPage | null;
+interface TransactionsOutTableProps {
+    data: TransactionOutPage | null;
     loading: boolean;
     error: string | null;
-    filters: TransactionFilters;
-    onFiltersChange: (f: TransactionFilters) => void;
-    onRowClick: (tx: Transaction) => void;
+    filters: TransactionOutFilters;
+    onFiltersChange: (f: TransactionOutFilters) => void;
+    onRowClick: (tx: TransactionOut) => void;
     onRefresh: () => void;
 }
 
-// ── Component ─────────────────────────────────────────────────────────────────
-
-export function TransactionsTable({
+export function TransactionsOutTable({
     data, loading, error, filters, onFiltersChange, onRowClick, onRefresh,
-}: TransactionsTableProps) {
+}: TransactionsOutTableProps) {
     const t = useTranslations("Dashboard.Transactions.Table");
-
     const { data: apps } = useApps();
 
     const [sorting,          setSorting]          = React.useState<SortingState>([{ id: "createdAt", desc: true }]);
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
     const [globalFilter,     setGlobalFilter]     = React.useState("");
 
-    const rows: Transaction[] = data?.content ?? [];
+    const rows: TransactionOut[] = data?.content ?? [];
 
-    const statusLabel = (s: TransactionStatus): string => {
-        const map: Record<TransactionStatus, string> = {
-            SUCCESS: t("statusSuccess"), PENDING: t("statusPending"),
-            FAILED: t("statusFailed"), CANCELLED: t("statusCancelled"), REFUNDED: t("statusRefunded"),
-        };
-        return map[s];
-    };
-
-    const typeLabel = (type: string): string => {
-        const map: Record<string, string> = {
-            CHECKOUT: t("typeCheckout"), CHARGE: t("typeCharge"), FUND_COLLECTION: t("typeFundCollection"),
-        };
-        return map[type] ?? type;
-    };
+    const statusLabel = (s: TransactionStatus): string => ({
+        SUCCESS: t("statusSuccess"), PENDING: t("statusPending"),
+        FAILED: t("statusFailed"), CANCELLED: t("statusCancelled"), REFUNDED: t("statusRefunded"),
+    })[s];
 
     const fmt = (n: number) =>
         new Intl.NumberFormat("fr-FR", { style: "currency", currency: "XAF", maximumFractionDigits: 0 }).format(n);
 
-    const columns: ColumnDef<Transaction>[] = [
+    const columns: ColumnDef<TransactionOut>[] = [
         {
             accessorKey: "reference",
             header: t("reference"),
@@ -127,39 +114,26 @@ export function TransactionsTable({
             ),
         },
         {
-            accessorKey: "type",
-            header: t("type"),
-            meta: { className: "hidden sm:table-cell" },
-            cell: ({ row }) => {
-                const type = row.getValue<string>("type");
-                return (
-                    <Badge variant="outline" className="text-xs whitespace-nowrap">
-                        {typeLabel(type)}
-                    </Badge>
-                );
-            },
-        },
-        {
-            accessorKey: "payerName",
-            header: t("client"),
+            accessorKey: "beneficiaryName",
+            header: t("beneficiary"),
             cell: ({ row }) => {
                 const tx = row.original;
                 return (
                     <div className="min-w-[110px]">
                         <p className="text-sm font-medium text-foreground leading-tight">
-                            {tx.payerName ?? "-"}
+                            {tx.beneficiaryName ?? "-"}
                         </p>
                         <div className="hidden sm:flex items-center gap-1 mt-0.5 min-w-0">
                             <p className="text-xs text-muted-foreground font-mono leading-tight truncate">
-                                {tx.payerAccount ?? "-"}
+                                {tx.beneficiaryAccount ?? "-"}
                             </p>
-                            {tx.payerAccount && (
+                            {tx.beneficiaryAccount && (
                                 <button
                                     type="button"
                                     className="text-muted-foreground hover:text-foreground transition-colors shrink-0"
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        navigator.clipboard.writeText(tx.payerAccount!);
+                                        navigator.clipboard.writeText(tx.beneficiaryAccount!);
                                         toast.success(t("successCopy"), { description: t("descPhoneCopy") });
                                     }}
                                 >
@@ -179,6 +153,16 @@ export function TransactionsTable({
                 const p = row.getValue<string | null>("provider");
                 if (!p) return <span className="text-muted-foreground text-sm">-</span>;
                 return <span className="text-sm font-medium whitespace-nowrap">{p}</span>;
+            },
+        },
+        {
+            accessorKey: "appName",
+            header: t("application"),
+            meta: { className: "hidden lg:table-cell" },
+            cell: ({ row }) => {
+                const a = row.getValue<string | null>("appName");
+                if (!a) return <span className="text-muted-foreground text-sm">-</span>;
+                return <span className="text-sm truncate block max-w-[140px]">{a}</span>;
             },
         },
         {
@@ -248,16 +232,15 @@ export function TransactionsTable({
         pageCount:                data?.totalPages ?? 0,
     });
 
-    const totalPages = data?.totalPages ?? 1;
+    const totalPages  = data?.totalPages ?? 1;
     const currentPage = filters.page ?? 0;
 
     return (
         <div className="w-full space-y-4">
             {/* Filters */}
             <div className="flex flex-col gap-2">
-                {/* Ligne 1 : recherche + statut + type + refresh */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                    <div className="relative flex-1 min-w-0">
+                    <div className="relative flex-1">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
                         <Input
                             placeholder={t("filterPlaceholder")}
@@ -284,20 +267,6 @@ export function TransactionsTable({
                             </SelectContent>
                         </Select>
                         <Select
-                            value={filters.type || "all"}
-                            onValueChange={(v) => onFiltersChange({ ...filters, type: v === "all" ? "" : v as TransactionType, page: 0 })}
-                        >
-                            <SelectTrigger className="flex-1 sm:w-[160px]">
-                                <SelectValue placeholder={t("typeAll")} />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="all">{t("typeAll")}</SelectItem>
-                                <SelectItem value="CHECKOUT">{t("typeCheckout")}</SelectItem>
-                                <SelectItem value="CHARGE">{t("typeCharge")}</SelectItem>
-                                <SelectItem value="FUND_COLLECTION">{t("typeFundCollection")}</SelectItem>
-                            </SelectContent>
-                        </Select>
-                        <Select
                             value={filters.appId || "all"}
                             onValueChange={(v) => onFiltersChange({ ...filters, appId: v === "all" ? undefined : v, page: 0 })}
                         >
@@ -312,39 +281,12 @@ export function TransactionsTable({
                             </SelectContent>
                         </Select>
                         <Button variant="outline" size="icon" onClick={onRefresh} title="Rafraîchir" disabled={loading} className="shrink-0">
-                            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <RefreshCcw className="h-4 w-4" />}
+                            {loading
+                                ? <Loader2 className="h-4 w-4 animate-spin" />
+                                : <RefreshCcw className="h-4 w-4" />
+                            }
                         </Button>
                     </div>
-                </div>
-
-                {/* Ligne 2 : plage de dates */}
-                <div className="flex items-center gap-2">
-                    <div className="relative flex-1">
-                        <CalendarIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-                        <Input
-                            type="date" title={t("filterFrom")}
-                            value={filters.from ?? ""}
-                            onChange={(e) => onFiltersChange({ ...filters, from: e.target.value || undefined, page: 0 })}
-                            className="pl-9 text-sm"
-                        />
-                    </div>
-                    <span className="text-xs text-muted-foreground shrink-0">→</span>
-                    <div className="relative flex-1">
-                        <CalendarIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-                        <Input
-                            type="date" title={t("filterTo")}
-                            value={filters.to ?? ""}
-                            onChange={(e) => onFiltersChange({ ...filters, to: e.target.value || undefined, page: 0 })}
-                            className="pl-9 text-sm"
-                        />
-                    </div>
-                    {(filters.from || filters.to) && (
-                        <Button variant="ghost" size="sm"
-                            onClick={() => onFiltersChange({ ...filters, from: undefined, to: undefined, page: 0 })}
-                            className="text-xs text-muted-foreground shrink-0">
-                            ✕ {t("clearDates")}
-                        </Button>
-                    )}
                 </div>
             </div>
 
