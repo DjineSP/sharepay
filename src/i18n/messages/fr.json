@@ -944,6 +944,8 @@
     "Transactions": {
       "title": "Transactions",
       "subtitle": "Historique et suivi de toutes vos transactions.",
+      "tabIn": "Entrées",
+      "tabOut": "Sorties",
       "Stats": {
         "success": "Réussies",
         "successRate": "taux de succès",
@@ -975,13 +977,23 @@
         "seriesCancelled": "Annulé",
         "seriesRefunded": "Remboursé",
         "seriesMTN": "MTN Mobile Money",
-        "seriesOrange": "Orange Money"
+        "seriesOrange": "Orange Money",
+        "thisWeek": "Cette semaine",
+        "thisMonth": "Ce mois",
+        "customYear": "Par année",
+        "customDays": "Plage de jours",
+        "yearInputLabel": "Année",
+        "fromInputLabel": "Du",
+        "toInputLabel": "Au",
+        "apply": "Appliquer"
       },
       "Table": {
         "reference": "Référence",
         "type": "Type",
         "client": "Client",
         "provider": "Opérateur",
+        "application": "Application",
+        "beneficiary": "Bénéficiaire",
         "amount": "Montant",
         "status": "Statut",
         "date": "Date",
@@ -1011,10 +1023,16 @@
         "next": "Suivant",
         "typeCheckout": "Checkout",
         "typeCharge": "Charge directe",
-        "typeFundCollection": "Collecte de fonds"
+        "typeFundCollection": "Collecte de fonds",
+        "filterFrom": "Date de début",
+        "filterTo": "Date de fin",
+        "clearDates": "Effacer les dates",
+        "appAll": "Toutes les applications"
       },
       "Detail": {
         "title": "Détails de la transaction",
+        "titleIn": "Encaissement",
+        "titleOut": "Décaissement",
         "copiedId": "Copié !",
         "sectionGeneral": "Informations générales",
         "sectionAmounts": "Montants",
@@ -1049,7 +1067,17 @@
         "typeCharge": "Charge directe",
         "typeFundCollection": "Collecte de fonds",
         "labelMerchantRef": "Réf. marchand",
-        "labelDescription": "Description"
+        "labelDescription": "Description",
+        "sectionFailure": "Détails de l'échec",
+        "sectionBeneficiary": "Bénéficiaire",
+        "labelFailureReason": "Raison de l'échec",
+        "labelFailureCode": "Code d'erreur",
+        "labelCustomerName": "Nom du client",
+        "labelCustomerEmail": "Email du client",
+        "labelCustomerPhone": "Téléphone client",
+        "labelExpiry": "Expiration",
+        "labelBeneficiary": "Bénéficiaire",
+        "labelBeneficiaryAccount": "Compte bénéficiaire"
       }
     },
     "Apps": {

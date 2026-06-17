@@ -2,24 +2,23 @@
 
 import { CheckCircle2, Clock, XCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Transaction, TransactionPage } from "@/features/merchant/transactions/types";
+import { TransactionStatsData } from "@/features/merchant/transactions/types";
 
 interface TransactionsStatsCardsProps {
-    data: TransactionPage | null;
+    data: TransactionStatsData | null;
     loading?: boolean;
 }
 
 export function TransactionsStatsCards({ data, loading }: TransactionsStatsCardsProps) {
     const t = useTranslations("Dashboard.Transactions.Stats");
 
-    const transactions: Transaction[] = data?.content ?? [];
-    const total        = data?.totalElements ?? 0;
-    const successCount = transactions.filter((tx) => tx.status === "SUCCESS").length;
-    const pendingCount = transactions.filter((tx) => tx.status === "PENDING").length;
-    const failedCount  = transactions.filter((tx) => tx.status === "FAILED").length;
+    const total        = data?.total ?? 0;
+    const successCount = data?.successCount ?? 0;
+    const pendingCount = data?.pendingCount ?? 0;
+    const failedCount  = data?.failedCount  ?? 0;
 
-    const successRate  = total > 0 ? Math.round((successCount / transactions.length) * 100) : 0;
-    const failedRate   = total > 0 ? Math.round((failedCount  / transactions.length) * 100) : 0;
+    const successRate  = total > 0 ? Math.round((successCount / total) * 100) : 0;
+    const failedRate   = total > 0 ? Math.round((failedCount  / total) * 100) : 0;
 
     const skeleton = loading && !data;
 
