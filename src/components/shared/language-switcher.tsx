@@ -3,7 +3,7 @@
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/routing";
 import { useTransition } from "react";
-import { Check, Loader2, ChevronDown } from "lucide-react";
+import { Check, Languages, Loader2, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
@@ -19,19 +19,9 @@ export function LanguageSwitcher() {
   const [isPending, startTransition] = useTransition();
 
   const languages = [
-    {
-      code: 'fr',
-      label: 'Français',
-      flagSrc: 'https://flagcdn.com/w40/fr.png'
-    },
-    {
-      code: 'en',
-      label: 'English',
-      flagSrc: 'https://flagcdn.com/w40/gb.png'
-    },
+    { code: 'fr', label: 'Français' },
+    { code: 'en', label: 'English' },
   ];
-
-  const currentLanguage = languages.find(l => l.code === locale);
 
   function onSelect(nextLocale: string) {
     if (nextLocale === locale) return;
@@ -48,19 +38,12 @@ export function LanguageSwitcher() {
           suppressHydrationWarning
           className="flex items-center gap-2 text-sm font-medium text-muted-foreground outline-none cursor-pointer transition-colors hover:text-primary px-2 py-1.5 rounded-lg border-none bg-transparent"
         >
-          {/* Spinner si chargement, sinon Drapeau Actuel */}
           {isPending ? (
             <Loader2 className="h-4 w-4 animate-spin" />
           ) : (
-            <div className="relative h-3.5 w-5 overflow-hidden rounded-sm shadow-sm">
-              <img
-                src={currentLanguage?.flagSrc}
-                alt={currentLanguage?.label}
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <Languages className="h-4 w-4" />
           )}
- 
+
           <span className="uppercase font-semibold">{locale}</span>
           <ChevronDown className="h-3 w-3 opacity-50 transition-transform duration-300" />
         </button>
@@ -79,16 +62,7 @@ export function LanguageSwitcher() {
                 : "text-foreground focus:bg-muted"
             )}
           >
-            <div className="flex items-center gap-3">
-              <div className="relative h-3.5 w-5 overflow-hidden rounded-sm shadow-sm">
-                <img
-                  src={lang.flagSrc}
-                  alt={lang.label}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <span>{lang.label}</span>
-            </div>
+            <span>{lang.label}</span>
 
             {locale === lang.code && (
               <Check className="h-3.5 w-3.5 text-primary" />
