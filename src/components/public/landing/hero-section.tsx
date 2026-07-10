@@ -31,9 +31,9 @@ const CHART_AREA = `${CHART_LINE} L280,70 L0,70 Z`;
 const X_LABELS   = ["26 avr", "27 avr", "28 avr", "29 avr", "30 avr", "01 mai", "02 mai"];
 
 const MOCK_TRANSACTIONS = [
-    { initials: "KM", name: "Kouam Martin",  meta: "02 mai · MTN Mobile Money", amount: "+15 000 XAF", avatarBg: "bg-amber-500/15",   avatarText: "text-amber-600"   },
-    { initials: "FB", name: "Fotso Brice",   meta: "01 mai · Orange Money",     amount: "+8 500 XAF",  avatarBg: "bg-orange-500/15",  avatarText: "text-orange-500"  },
-    { initials: "NA", name: "Ngo Alice",     meta: "01 mai · MTN Mobile Money", amount: "+22 000 XAF", avatarBg: "bg-emerald-500/15", avatarText: "text-emerald-600" },
+    { initials: "KM", name: "DJINE SINTO PAFING",  meta: "02 mai · MTN Mobile Money", amount: "+15 000 XAF", avatarBg: "bg-amber-500/15",   avatarText: "text-amber-600"   },
+    { initials: "FB", name: "MAHAMAT ALI",   meta: "01 mai · Orange Money",     amount: "+8 500 XAF",  avatarBg: "bg-orange-500/15",  avatarText: "text-orange-500"  },
+    { initials: "NA", name: "AMAYEN BOUSSIOM THIERRY MARTIN",     meta: "01 mai · MTN Mobile Money", amount: "+22 000 XAF", avatarBg: "bg-emerald-500/15", avatarText: "text-emerald-600" },
 ];
 
 export function HeroSection() {
@@ -153,7 +153,7 @@ export function HeroSection() {
 
                                 {/* Balance */}
                                 <div className="mb-4">
-                                    <p className="text-2xl font-black text-foreground tracking-tight">5 240 000 XAF</p>
+                                    <p className="text-2xl font-black text-foreground tracking-tight">240 000 XAF</p>
                                     <div className="flex items-center gap-1.5 mt-1">
                                         <div className="flex items-center gap-1 text-emerald-500">
                                             <TrendingUp className="h-3 w-3" />
