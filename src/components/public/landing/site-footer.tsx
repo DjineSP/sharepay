@@ -35,14 +35,13 @@ export function SiteFooter() {
 
   const footerLinks = {
     product: [
-      { name: t('features'), href: "/features" },
+      { name: t('services'), href: "/services" },
       { name: t('pricing'), href: "/pricing" },
-      { name: t('api_lab'), href: "/test-api" },
+      { name: t('try_it'), href: "/try" },
       { name: t('api'), href: "/docs" },
     ],
     company: [
       { name: t('about'), href: "/about" },
-      { name: t('blog'), href: "/blog" },
       { name: t('faq'), href: "/faq" },
       { name: t('contact'), href: "/contact" },
     ],
@@ -157,12 +156,12 @@ export function SiteFooter() {
             <p className="text-sm text-muted-foreground" suppressHydrationWarning>
               {t('developedBy')}{' '}
               <a 
-                href="https://www.teasea-incubator.com" /* Remplace par le vrai lien si différent */
+                href="https://www.te-sea.com" /* Remplace par le vrai lien si différent */
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="font-medium hover:text-primary transition-colors duration-200"
               >
-                TEASEA Incubator
+                TE-SEA Incubator
               </a>
             </p>
 

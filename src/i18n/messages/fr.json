@@ -2,11 +2,11 @@
   "Navigation": {
     "login": "Connexion",
     "register": "Commencer",
-    "features": "Fonctionnalités",
+    "dashboard": "Tableau de bord",
+    "services": "Services",
     "pricing": "Tarifs",
-    "api_lab": "Test API",
-    "documentation": "Documentations",
-    "blog": "Blog",
+    "try_it": "Tester",
+    "documentation": "Documentation API",
     "about": "À propos",
     "terms": "Conditions d'utilisation",
     "privacy": "Termes de confidentialité"
@@ -14,14 +14,13 @@
   "Footer": {
     "tagline": "L'infrastructure de paiement pour l'Afrique de demain.",
     "product": "Produit",
-    "features": "Fonctionnalités",
+    "services": "Services",
     "pricing": "Tarifs",
     "api": "Docs",
-    "api_lab": "Test API",
+    "try_it": "Tester",
     "status": "État du système",
     "company": "Entreprise",
     "about": "À propos",
-    "blog": "Blog",
     "faq": "FAQ",
     "contact": "Contact",
     "legal": "Légal",
@@ -613,6 +612,7 @@
     "Header": {
       "searchPlaceholder": "Rechercher...",
       "account": "Mon compte",
+      "settings": "Paramètres",
       "logout": "Déconnexion"
     },
     "Account": {
