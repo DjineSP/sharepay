@@ -31,9 +31,9 @@ const CHART_AREA = `${CHART_LINE} L280,70 L0,70 Z`;
 const X_LABELS   = ["26 avr", "27 avr", "28 avr", "29 avr", "30 avr", "01 mai", "02 mai"];
 
 const MOCK_TRANSACTIONS = [
-    { initials: "KM", name: "DJINE SINTO PAFING",  meta: "02 mai · MTN Mobile Money", amount: "+15 000 XAF", avatarBg: "bg-amber-500/15",   avatarText: "text-amber-600"   },
-    { initials: "FB", name: "MAHAMAT ALI",   meta: "01 mai · Orange Money",     amount: "+8 500 XAF",  avatarBg: "bg-orange-500/15",  avatarText: "text-orange-500"  },
-    { initials: "NA", name: "AMAYEN BOUSSIOM THIERRY MARTIN",     meta: "01 mai · MTN Mobile Money", amount: "+22 000 XAF", avatarBg: "bg-emerald-500/15", avatarText: "text-emerald-600" },
+    { initials: "DS", name: "DJINE SINTO PAFING",  meta: "02 mai · MTN Mobile Money", amount: "+15 000 XAF", avatarBg: "bg-amber-500/15",   avatarText: "text-amber-600"   },
+    { initials: "MA", name: "MAHAMAT ALI",   meta: "01 mai · Orange Money",     amount: "+8 500 XAF",  avatarBg: "bg-orange-500/15",  avatarText: "text-orange-500"  },
+    { initials: "AB", name: "AMAYEN BOUSSIOM THIERRY MARTIN",     meta: "01 mai · MTN Mobile Money", amount: "+22 000 XAF", avatarBg: "bg-emerald-500/15", avatarText: "text-emerald-600" },
 ];
 
 export function HeroSection() {

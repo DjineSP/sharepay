@@ -16,6 +16,22 @@ const nextConfig: NextConfig = {
             },
         ],
     },
+    async redirects() {
+        return [
+            // /features a été renommée en /services : on préserve les liens existants.
+            {
+                source: '/features',
+                destination: '/services',
+                permanent: true,
+            },
+            // /test-api a été renommée en /try.
+            {
+                source: '/test-api',
+                destination: '/try',
+                permanent: true,
+            },
+        ];
+    },
     async rewrites() {
         return [
             {

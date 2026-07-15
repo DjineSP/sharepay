@@ -25,7 +25,6 @@ import {
     LogIn,
     LogOut,
     ArrowRight,
-    Settings,
     LayoutDashboard,
 } from "lucide-react";
 
@@ -75,11 +74,11 @@ export function SiteHeader() {
     const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
     const menuItems = [
-        { label: t('features'),    href: '/features' },
-        { label: t('pricing'),     href: '/pricing' },
-        { label: t('api_lab'),     href: '/test-api' },
-        { label: t('blog'),        href: '/blog' },
-        { label: t('about'),       href: '/about' },
+        { label: t('services'),      href: '/services' },
+        { label: t('pricing'),       href: '/pricing' },
+        { label: t('try_it'),        href: '/try' },
+        { label: t('documentation'), href: '/docs' },
+        { label: t('about'),         href: '/about' },
     ];
 
     const isActive = (href: string) =>
@@ -96,14 +95,16 @@ export function SiteHeader() {
                 />
             )}
 
-            <header className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
-                <div className={cn(
-                    "w-full max-w-6xl border rounded-full transition-all duration-300",
-                    isScrolled
-                        ? "bg-background/95 backdrop-blur-xl border-border/80 shadow-xl shadow-black/[0.08] dark:shadow-black/30"
-                        : "bg-background/80 backdrop-blur-md border-border/50 shadow-lg"
-                )}>
-                    <div className="px-6 h-16 flex items-center justify-between gap-4">
+            {/* Fond opaque : le HeroBackground contient un orbe animé qui transparaissait
+                à travers un header semi-transparent et en faisait dériver la teinte. */}
+            <header className={cn(
+                "fixed top-0 left-0 right-0 z-50 bg-background border-b border-border transition-shadow duration-300",
+                isScrolled
+                    ? "shadow-md dark:shadow-black/40"
+                    : "shadow-sm"
+            )}>
+                <div className="container">
+                    <div className="h-16 flex items-center justify-between gap-4">
 
                         {/* Logo */}
                         <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity shrink-0">
@@ -119,20 +120,23 @@ export function SiteHeader() {
                             <span className="font-bold text-xl text-primary">SharePay</span>
                         </Link>
 
-                        {/* Desktop Nav */}
-                        <nav className="hidden lg:flex items-center gap-1">
+                        {/* Desktop Nav - pleine hauteur pour ancrer l'indicatif actif sur la bordure basse */}
+                        <nav className="hidden lg:flex items-center h-16">
                             {menuItems.map((item) => (
                                 <Link
                                     key={item.href}
                                     href={item.href}
                                     className={cn(
-                                        "relative px-3 py-2 text-sm font-medium rounded-full transition-all duration-200 whitespace-nowrap",
+                                        "relative h-full flex items-center px-3 text-sm font-medium transition-colors whitespace-nowrap",
                                         isActive(item.href)
-                                            ? "text-primary bg-primary/10"
-                                            : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                                            ? "text-primary"
+                                            : "text-muted-foreground hover:text-foreground"
                                     )}
                                 >
                                     {item.label}
+                                    {isActive(item.href) && (
+                                        <span className="absolute inset-x-3 bottom-0 h-0.5 bg-primary rounded-full" />
+                                    )}
                                 </Link>
                             ))}
                         </nav>
@@ -140,8 +144,8 @@ export function SiteHeader() {
                         {/* Right actions */}
                         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
 
-                            {/* Theme + Language - hidden below xl */}
-                            <div className="hidden xl:flex items-center gap-0 border rounded-full pl-1 pr-3 py-1 bg-background/50 shadow-sm hover:border-primary/50 transition-colors">
+                            {/* Theme + Language - dès lg, sinon inaccessible entre lg et xl */}
+                            <div className="hidden lg:flex items-center gap-0 border rounded-full pl-1 pr-2 py-0.5 bg-background/50 hover:border-primary/50 transition-colors">
                                 <ThemeToggle />
                                 <div className="h-4 w-px bg-border mx-1" />
                                 <LanguageSwitcher />
@@ -157,7 +161,7 @@ export function SiteHeader() {
                                         <Button variant="ghost" size="sm" className="font-medium rounded-full gap-1.5" asChild>
                                             <Link href="/merchant/dashboard">
                                                 <LayoutDashboard className="h-4 w-4" />
-                                                Dashboard
+                                                {t('dashboard')}
                                             </Link>
                                         </Button>
                                         <div className="h-6 w-px bg-border" />
@@ -237,10 +241,12 @@ export function SiteHeader() {
                             </button>
                         </div>
                     </div>
+                </div>
 
-                    {/* Mobile menu dropdown */}
-                    {isMobileMenuOpen && (
-                        <div className="absolute top-full left-0 right-0 mt-3 rounded-2xl border bg-card p-5 shadow-2xl animate-in slide-in-from-top-4 duration-200">
+                {/* Mobile menu - panneau pleine largeur sous la barre */}
+                {isMobileMenuOpen && (
+                    <div className="lg:hidden border-t bg-background max-h-[calc(100vh-4rem)] overflow-y-auto animate-in slide-in-from-top-2 duration-200">
+                        <div className="container py-5">
 
                             {/* Nav links */}
                             <nav className="flex flex-col gap-1 mb-4">
@@ -294,7 +300,7 @@ export function SiteHeader() {
                                     <Button className="w-full h-11 rounded-xl gap-2" asChild>
                                         <Link href="/merchant/dashboard" onClick={closeMobileMenu}>
                                             <LayoutDashboard className="h-4 w-4" />
-                                            Dashboard
+                                            {t('dashboard')}
                                         </Link>
                                     </Button>
                                     <Button
@@ -323,8 +329,8 @@ export function SiteHeader() {
                                 </div>
                             )}
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
             </header>
         </>
     );
