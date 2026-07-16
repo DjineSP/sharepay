@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useRouter } from "@/i18n/routing";
 import { AdminPageHeading } from "@/components/admin/overview/admin-page-heading";
 import { useMerchants } from "@/features/admin/merchants/hooks/use-merchants";
 import { adminMerchantsService } from "@/features/admin/merchants/services/merchants.service";
 import { AccountStatus, KycLevel, MerchantSummaryResponse } from "@/features/admin/merchants/types";
+import { STATUS_LABELS, KYC_LABELS, statusVariant, kycVariant } from "@/features/admin/merchants/labels";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -34,27 +36,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
 
-const STATUS_LABELS: Record<AccountStatus, string> = {
-    ACTIVE: "Actif",
-    INACTIVE: "Inactif",
-    SUSPENDED: "Suspendu",
-    DELETED: "Supprimé",
-};
-
-const KYC_LABELS: Record<KycLevel, string> = {
-    NONE: "Aucun",
-    BASIC: "Basique",
-    ADVANCED: "Avancé",
-    FULL: "Complet",
-};
-
-const statusVariant = (s: AccountStatus) =>
-    s === "ACTIVE" ? "default" : s === "SUSPENDED" ? "destructive" : "secondary";
-
-const kycVariant = (k: KycLevel) =>
-    k === "FULL" ? "default" : k === "ADVANCED" ? "secondary" : "outline";
-
 export default function AdminMerchantsPage() {
+    const router = useRouter();
     const [page, setPage] = useState(0);
     const [statusFilter, setStatusFilter] = useState<AccountStatus | undefined>(undefined);
     const { data, loading, error, refetch } = useMerchants(page, 20, statusFilter);
@@ -171,7 +154,11 @@ export default function AdminMerchantsPage() {
                             </TableRow>
                         ) : (
                             data.content.map((m) => (
-                                <TableRow key={m.id}>
+                                <TableRow
+                                    key={m.id}
+                                    className="cursor-pointer hover:bg-muted/40"
+                                    onClick={() => router.push(`/admin/merchants/${m.id}`)}
+                                >
                                     <TableCell className="font-medium">{m.fullName}</TableCell>
                                     <TableCell className="text-muted-foreground">{m.email}</TableCell>
                                     <TableCell>{m.country}</TableCell>
@@ -189,7 +176,7 @@ export default function AdminMerchantsPage() {
                                     <TableCell className="text-muted-foreground text-xs">
                                         {new Date(m.createdAt).toLocaleDateString("fr-FR")}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell onClick={(e) => e.stopPropagation()}>
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <Button variant="ghost" size="icon" className="h-8 w-8">
