@@ -148,7 +148,7 @@ export function SiteFooter() {
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-6" suppressHydrationWarning>
           <div className="flex flex-col md:flex-row items-center gap-3 text-center md:text-left">
             <p className="text-sm text-muted-foreground" suppressHydrationWarning>
-              {t('copyright')}
+              {t('copyright', { year: new Date().getFullYear() })}
             </p>
             <span className="hidden md:inline text-border/50">•</span>
             
@@ -164,12 +164,6 @@ export function SiteFooter() {
                 TE-SEA Incubator
               </a>
             </p>
-
-            <span className="hidden md:inline text-border/50">•</span>
-            <div className="flex items-center gap-2 text-xs font-medium text-emerald-600 dark:text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20" suppressHydrationWarning>
-              <CheckCircle2 className="h-3 w-3" />
-              <span>{t('systemStatus')}</span>
-            </div>
           </div>
 
           <div className="flex items-center gap-4">

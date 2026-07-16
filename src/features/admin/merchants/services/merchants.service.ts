@@ -3,6 +3,7 @@ import { parseApiResponse } from "@/lib/api/response";
 import { ApiResponse } from "@/lib/api/types";
 import {
     MerchantSummaryResponse,
+    Merchant360Response,
     PaginationResponse,
     UpdateStatusRequest,
     UpdateMerchantKycRequest,
@@ -22,6 +23,11 @@ export const adminMerchantsService = {
 
     async get(id: string): Promise<MerchantSummaryResponse> {
         const res = await client.get<ApiResponse<MerchantSummaryResponse>>(`/api/v1/admin/merchants/${id}`);
+        return parseApiResponse(res.data, res.status)!;
+    },
+
+    async getOverview(id: string): Promise<Merchant360Response> {
+        const res = await client.get<ApiResponse<Merchant360Response>>(`/api/v1/admin/merchants/${id}/overview`);
         return parseApiResponse(res.data, res.status)!;
     },
 
