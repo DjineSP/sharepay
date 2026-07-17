@@ -1,104 +1,210 @@
 "use client";
 
+import { useRouter } from "@/i18n/routing";
 import { AdminPageHeading } from "@/components/admin/overview/admin-page-heading";
-import { AdminStatsGrid } from "@/components/admin/overview/admin-stats-grid";
-import { AdminActivityFeed } from "@/components/admin/overview/admin-activity-feed";
-import { Users, Server, ShieldAlert, Database, Zap, Globe, Cpu } from "lucide-react";
+import { AdminStatsGrid, AdminStat } from "@/components/admin/overview/admin-stats-grid";
+import { AdminActivityFeed, AdminActivityItem } from "@/components/admin/overview/admin-activity-feed";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+    Users, Wallet, TrendingUp, TrendingDown, Percent, ShieldCheck,
+    ArrowUpRight, UserPlus, CheckCircle2,
+} from "lucide-react";
+
+import { useAdminOverview } from "@/features/admin/stats";
+import { AdminMerchantMini } from "@/features/admin/stats/types";
+import { STATUS_LABELS, KYC_LABELS, TX_STATUS_LABELS, statusVariant } from "@/features/admin/merchants/labels";
+import { formatAmount } from "@/lib/utils";
+
+const money = (n: number) => formatAmount(n, "XAF");
+const dateShort = (iso: string) => new Date(iso).toLocaleDateString("fr-FR");
+
+function MerchantRow({ m, onClick }: { m: AdminMerchantMini; onClick: () => void }) {
+    return (
+        <button
+            onClick={onClick}
+            className="w-full flex items-center gap-3 p-4 border-b last:border-b-0 hover:bg-muted/40 transition-colors text-left"
+        >
+            <div className="h-9 w-9 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 text-xs font-bold">
+                {(m.fullName || "M").slice(0, 2).toUpperCase()}
+            </div>
+            <div className="flex-1 min-w-0">
+                <p className="text-sm font-semibold truncate">{m.fullName}</p>
+                <p className="text-[11px] text-muted-foreground truncate">{m.email}</p>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+                <Badge variant={statusVariant(m.status)} className="hidden sm:inline-flex">{STATUS_LABELS[m.status]}</Badge>
+                <span className="text-[11px] text-muted-foreground hidden md:inline">{KYC_LABELS[m.kycLevel]}</span>
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground" />
+            </div>
+        </button>
+    );
+}
+
+function ListCard({
+    title, icon: Icon, count, children,
+}: { title: string; icon: React.ElementType; count?: number; children: React.ReactNode }) {
+    return (
+        <div className="bg-card text-card-foreground rounded-xl border flex flex-col overflow-hidden">
+            <div className="p-5 border-b flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                    <Icon className="h-4 w-4 text-muted-foreground" />
+                    <h3 className="text-sm font-bold">{title}</h3>
+                </div>
+                {count !== undefined && count > 0 && (
+                    <Badge variant="secondary">{count}</Badge>
+                )}
+            </div>
+            <div className="flex-1 max-h-[420px] overflow-y-auto">{children}</div>
+        </div>
+    );
+}
+
+function EmptyState({ label }: { label: string }) {
+    return (
+        <div className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+            <CheckCircle2 className="h-8 w-8 text-emerald-500/60" />
+            <p className="text-sm text-muted-foreground">{label}</p>
+        </div>
+    );
+}
 
 export default function AdminDashboardPage() {
-    const stats = [
+    const router = useRouter();
+    const { data, loading, error, refetch } = useAdminOverview();
+
+    const successRate = data && data.txTotal > 0
+        ? Math.round((data.txSuccess / data.txTotal) * 1000) / 10
+        : 0;
+
+    const stats: AdminStat[] = [
         {
-            label: "Volume Global (24h)",
-            value: "12 450 000 FCFA",
-            badge: { label: "+8.2%", className: "text-emerald-600 bg-emerald-500/10" },
-            icon: <Globe className="h-5 w-5" />,
+            label: "Volume encaissé",
+            value: money(data?.payInVolume ?? 0),
+            icon: <TrendingUp className="h-5 w-5" />,
             iconWrapClassName: "bg-emerald-500/10 text-emerald-600",
-            progress: { value: 72, className: "bg-emerald-500" },
+            badge: { label: `${data?.txSuccess ?? 0} réussies`, className: "text-emerald-600 bg-emerald-500/10" },
         },
         {
-            label: "Nouveaux Marchands",
-            value: "124",
-            badge: { label: "+15", className: "text-blue-600 bg-blue-500/10" },
+            label: "Volume payouts",
+            value: money(data?.payOutVolume ?? 0),
+            icon: <TrendingDown className="h-5 w-5" />,
+            iconWrapClassName: "bg-amber-500/10 text-amber-600",
+        },
+        {
+            label: "Float détenu",
+            value: money(data?.floatAvailable ?? 0),
+            icon: <Wallet className="h-5 w-5" />,
+            iconWrapClassName: "bg-primary/10 text-primary",
+            badge: { label: `${money(data?.floatPending ?? 0)} en attente`, className: "text-muted-foreground bg-muted" },
+        },
+        {
+            label: "Marchands",
+            value: `${data?.merchantsTotal ?? 0}`,
             icon: <Users className="h-5 w-5" />,
             iconWrapClassName: "bg-blue-500/10 text-blue-600",
-            progress: { value: 45, className: "bg-blue-500" },
+            badge: { label: `${data?.merchantsActive ?? 0} actifs`, className: "text-blue-600 bg-blue-500/10" },
         },
         {
-            label: "Santé Système",
-            value: "99.98%",
-            badge: { label: "Stable", className: "text-emerald-600 bg-emerald-500/10" },
-            icon: <Cpu className="h-5 w-5" />,
-            iconWrapClassName: "bg-emerald-500/10 text-emerald-600",
-            progress: { value: 100, className: "bg-emerald-500" },
+            label: "Taux de réussite",
+            value: `${successRate}%`,
+            icon: <Percent className="h-5 w-5" />,
+            iconWrapClassName: "bg-violet-500/10 text-violet-600",
+            progress: { value: successRate, className: "bg-violet-500" },
+        },
+        {
+            label: "À vérifier (KYB)",
+            value: `${data?.merchantsPending ?? 0}`,
+            icon: <ShieldCheck className="h-5 w-5" />,
+            iconWrapClassName: "bg-red-500/10 text-red-600",
+            badge: (data?.merchantsPending ?? 0) > 0
+                ? { label: "À traiter", className: "text-red-600 bg-red-500/10" }
+                : { label: "À jour", className: "text-emerald-600 bg-emerald-500/10" },
         },
     ];
 
-    const alerts = [
-        {
-            id: "sys-1",
-            title: "Trafic suspect détecté",
-            meta: "Il y a 5 min • IP 192.168.1.1",
-            badge: "ALERTE",
-            status: "Sévérité Haute",
-            badgeClassName: "text-red-600",
-            statusClassName: "text-red-600/70",
-            icon: <ShieldAlert className="h-5 w-5" />,
-            iconWrapClassName: "bg-red-500/10 text-red-600",
-        },
-        {
-            id: "sys-2",
-            title: "Sauvegarde réussie",
-            meta: "Il y a 2h • DB_Main",
-            badge: "OK",
-            status: "Automatique",
-            badgeClassName: "text-emerald-600",
-            statusClassName: "text-emerald-600/70",
-            icon: <Database className="h-5 w-5" />,
-            iconWrapClassName: "bg-emerald-500/10 text-emerald-600",
-        },
-    ];
+    const txItems: AdminActivityItem[] = (data?.recentTransactions ?? []).map((t) => ({
+        id: t.id,
+        title: t.merchantName,
+        meta: `${t.reference} • ${dateShort(t.createdAt)}`,
+        badge: money(t.amount),
+        status: TX_STATUS_LABELS[t.status],
+        badgeClassName: "text-foreground",
+        statusClassName: t.status === "SUCCESS" ? "text-emerald-600/80"
+            : t.status === "FAILED" || t.status === "CANCELLED" ? "text-red-600/80"
+            : "text-muted-foreground",
+        icon: <span className="text-xs font-bold">{t.currency}</span>,
+        iconWrapClassName: "bg-muted text-muted-foreground",
+    }));
 
     return (
         <div className="space-y-8">
             <AdminPageHeading
                 title="Tableau de Bord Administrateur"
                 subtitle="Vue d'ensemble de l'écosystème SharePay"
+                action={
+                    <Button variant="outline" size="sm" onClick={() => refetch()}>
+                        Actualiser
+                    </Button>
+                }
             />
 
-            <AdminStatsGrid stats={stats} />
+            {error ? (
+                <div className="rounded-xl border bg-card p-10 text-center text-destructive">
+                    Impossible de charger les statistiques de la plateforme.
+                </div>
+            ) : (
+                <>
+                    <AdminStatsGrid stats={stats} isLoading={loading} />
 
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-                <div className="xl:col-span-2 bg-card text-card-foreground rounded-xl border p-6 shadow-sm flex items-center justify-center min-h-[260px]">
-                    <p className="text-sm text-muted-foreground">Graphique des transactions - à brancher sur l'API admin</p>
-                </div>
-                <AdminActivityFeed
-                    title="Alertes Système & Sécurité"
-                    viewAllLabel="Journal complet"
-                    items={alerts}
-                    onViewAll={() => {}}
-                />
-            </div>
+                    <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                        {/* File de vérification KYB (actionnable) */}
+                        <div className="xl:col-span-2">
+                            <ListCard
+                                title="File de vérification (KYB)"
+                                icon={ShieldCheck}
+                                count={data?.pendingVerification.length}
+                            >
+                                {loading ? (
+                                    <div className="p-4 space-y-3">
+                                        {Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} className="h-12 w-full rounded-lg" />)}
+                                    </div>
+                                ) : !data?.pendingVerification.length ? (
+                                    <EmptyState label="Aucun marchand en attente de vérification" />
+                                ) : (
+                                    data.pendingVerification.map((m) => (
+                                        <MerchantRow key={m.id} m={m} onClick={() => router.push(`/admin/merchants/${m.id}`)} />
+                                    ))
+                                )}
+                            </ListCard>
+                        </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-6 border rounded-xl bg-card shadow-sm flex items-center space-x-4 border-emerald-100 dark:border-emerald-900/30">
-                    <div className="p-3 bg-emerald-500/10 rounded-lg">
-                        <Zap className="h-6 w-6 text-emerald-600" />
+                        {/* Dernières transactions */}
+                        <AdminActivityFeed
+                            title="Dernières transactions"
+                            viewAllLabel="Voir tout"
+                            items={txItems}
+                            onViewAll={() => router.push("/admin/merchants")}
+                        />
                     </div>
-                    <div>
-                        <h3 className="font-semibold text-emerald-900 dark:text-emerald-100">Performance API</h3>
-                        <p className="text-sm text-emerald-600/80">Temps de réponse moyen : 45ms</p>
-                    </div>
-                </div>
-                <div className="p-6 border rounded-xl bg-card shadow-sm flex items-center space-x-4">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                        <Server className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                        <h3 className="font-semibold">Serveurs Actifs</h3>
-                        <p className="text-sm text-muted-foreground">8 instances opérationnelles / 2 régions</p>
-                    </div>
-                </div>
-            </div>
+
+                    {/* Derniers marchands inscrits */}
+                    <ListCard title="Derniers marchands inscrits" icon={UserPlus}>
+                        {loading ? (
+                            <div className="p-4 space-y-3">
+                                {Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} className="h-12 w-full rounded-lg" />)}
+                            </div>
+                        ) : !data?.recentMerchants.length ? (
+                            <EmptyState label="Aucun marchand" />
+                        ) : (
+                            data.recentMerchants.map((m) => (
+                                <MerchantRow key={m.id} m={m} onClick={() => router.push(`/admin/merchants/${m.id}`)} />
+                            ))
+                        )}
+                    </ListCard>
+                </>
+            )}
         </div>
     );
 }
