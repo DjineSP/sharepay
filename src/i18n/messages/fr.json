@@ -1543,7 +1543,45 @@
       "intro-payment-methods": "Moyens de Paiement",
       "auth-overview": "Vue d'ensemble",
       "auth-api-keys": "Clés d'API",
-      "auth-best-practices": "Bonnes Pratiques"
+      "auth-best-practices": "Bonnes Pratiques",
+      "responses-overview": "Vue d'ensemble",
+      "responses-envelope": "L'enveloppe",
+      "responses-pagination": "Listes paginées",
+      "responses-success-overview": "Vue d'ensemble",
+      "responses-success-example": "Exemple",
+      "responses-failed-overview": "Vue d'ensemble",
+      "responses-failed-example": "Exemple",
+      "responses-rejected-overview": "Vue d'ensemble",
+      "responses-rejected-example": "Exemple",
+      "errors-overview": "Vue d'ensemble",
+      "errors-http": "Erreurs HTTP",
+      "errors-business": "Codes d'erreur métier",
+      "health-overview": "Vue d'ensemble",
+      "health-request": "Requête",
+      "health-response": "Réponse",
+      "initiate-overview": "Vue d'ensemble",
+      "initiate-checkout": "Checkout (page hébergée)",
+      "initiate-charge": "Charge (débit direct)",
+      "status-overview": "Vue d'ensemble",
+      "status-payin": "Statut Pay-In",
+      "status-payout": "Statut Pay-Out",
+      "status-values": "Valeurs de statut",
+      "payout-overview": "Vue d'ensemble",
+      "payout-transfer": "Créer un virement",
+      "payout-balance": "Comportement du solde",
+      "webhooks-config-overview": "Vue d'ensemble",
+      "webhooks-config-endpoints": "Points de terminaison",
+      "webhooks-config-signature": "Vérifier les signatures",
+      "webhooks-config-retries": "Livraison et relances",
+      "webhooks-events-overview": "Vue d'ensemble",
+      "webhooks-events-list": "Types d'événements",
+      "webhooks-events-payload": "Format du payload",
+      "sdk-js-overview": "Vue d'ensemble",
+      "sdk-js-client": "Client minimal",
+      "sdk-php-overview": "Vue d'ensemble",
+      "sdk-php-client": "Client minimal",
+      "sdk-csharp-overview": "Vue d'ensemble",
+      "sdk-csharp-client": "Client minimal"
     },
     "Intro": {
       "title": "Documentation Développeur",
@@ -1563,6 +1601,105 @@
       "apiVersion": "Notre versionnement d'API suit un format basé sur la date. La version actuelle est",
       "paymentMethodsTitle": "Moyens de Paiement Supportés",
       "paymentMethodsDesc": "Nous prenons actuellement en charge les paiements via MTN Mobile Money et Orange Money pour faciliter vos transactions locales."
+    },
+    "Responses": {
+      "title": "Réponses",
+      "description": "Chaque réponse de l'API SharePay - succès ou erreur - utilise la même enveloppe ApiResponse<T>, votre intégration n'a donc besoin que d'un seul chemin de code pour traiter les résultats.",
+      "envelopeTitle": "L'enveloppe",
+      "envelopeDesc": "Tous les points de terminaison enveloppent leur contenu dans cette forme, que l'appel ait réussi ou non.",
+      "paginationTitle": "Listes paginées",
+      "paginationDesc": "Les points de terminaison de type liste (transactions, applications, collectes de fonds...) enveloppent leur contenu dans un PaginationResponse<T> plutôt qu'un simple tableau."
+    },
+    "ResponsesSuccess": {
+      "title": "Succès",
+      "description": "Un appel réussi retourne success: true accompagné d'un code métier et des données demandées.",
+      "exampleTitle": "Exemple"
+    },
+    "ResponsesFailed": {
+      "title": "Échoué",
+      "description": "Les requêtes mal formées - champs manquants, types invalides, JSON incorrect - sont rejetées avant l'exécution de toute logique métier.",
+      "exampleTitle": "Exemple"
+    },
+    "ResponsesRejected": {
+      "title": "Rejeté",
+      "description": "Une requête bien formée peut tout de même être rejetée lorsque l'appelant n'est pas autorisé à effectuer l'action, par exemple un compte inactif ou un rôle insuffisant.",
+      "exampleTitle": "Exemple"
+    },
+    "Errors": {
+      "title": "Codes d'erreurs",
+      "description": "Quand success vaut false, data est null et le champ code identifie précisément ce qui s'est mal passé.",
+      "httpTitle": "Erreurs HTTP",
+      "httpDesc": "Levées par le gestionnaire d'exceptions global avant que votre requête n'atteigne la logique métier.",
+      "businessTitle": "Codes d'erreur métier",
+      "businessDesc": "Levées au sein même du flux de paiement - elles portent une signification plus précise qu'un statut HTTP générique."
+    },
+    "Health": {
+      "title": "Santé",
+      "description": "Un point de terminaison léger et non authentifié pour vérifier que l'API est joignable - utile pour les sondes de disponibilité et les équilibreurs de charge.",
+      "requestTitle": "Requête",
+      "requestDesc": "Répond immédiatement, sans effet de bord. Aucune clé API requise.",
+      "responseTitle": "Réponse",
+      "responseDesc": "Une réponse 200 avec status: \"UP\" signifie que le service est joignable."
+    },
+    "Initiate": {
+      "title": "Initier un paiement",
+      "description": "Deux façons de collecter de l'argent auprès d'un client : l'envoyer vers une page Checkout hébergée, ou débiter directement son compte Mobile Money depuis votre backend.",
+      "checkoutTitle": "Checkout - page hébergée",
+      "checkoutDesc": "Crée une session de paiement web valable 30 minutes. Redirigez votre client vers le paymentUrl retourné pour qu'il choisisse son opérateur et finalise le paiement.",
+      "chargeTitle": "Charge - débit direct",
+      "chargeDesc": "Initie un paiement sans page web intermédiaire. Le provider et le compte payeur doivent être fournis dans la requête. Utilisez idempotencyKey pour éviter les doublons en cas de retry."
+    },
+    "Status": {
+      "title": "Vérifier le statut d'une transaction",
+      "description": "Sondez ces points de terminaison en attendant une notification webhook, ou pour réconcilier vos propres registres avec ceux de SharePay.",
+      "payinTitle": "Statut Pay-In",
+      "payinDesc": "Retourne le statut courant d'une transaction entrante (CHECKOUT ou CHARGE) identifiée par sa référence.",
+      "payoutTitle": "Statut Pay-Out",
+      "payoutDesc": "Retourne le statut courant d'un virement sortant identifié par sa référence.",
+      "valuesTitle": "Valeurs de statut",
+      "valuesDesc": "Chaque transaction - entrante ou sortante - traverse ce même ensemble de statuts."
+    },
+    "Payout": {
+      "title": "Retraits (Payout)",
+      "description": "Envoyez des fonds depuis votre solde SharePay vers un bénéficiaire Mobile Money.",
+      "transferTitle": "Créer un virement",
+      "transferDesc": "Crée un virement vers un bénéficiaire. Le montant est débité de votre solde disponible. La transaction passe immédiatement en PENDING - le résultat définitif est notifié par webhook.",
+      "balanceTitle": "Comportement du solde",
+      "balanceDesc": "Comprendre comment vos soldes disponible et en attente évoluent pendant un virement vous évite des surprises lors de la réconciliation."
+    },
+    "WebhooksConfig": {
+      "title": "Configuration des webhooks",
+      "description": "Gérez l'URL vers laquelle SharePay livre les événements, faites tourner votre secret de signature, et envoyez-vous un événement de test.",
+      "endpointsTitle": "Points de terminaison de configuration",
+      "getDesc": "Retourne votre configuration webhook actuelle. Le secret n'est affiché que sous forme d'un court préfixe, jamais en entier.",
+      "patchDesc": "Met à jour l'URL de destination des événements.",
+      "testDesc": "Envoie immédiatement un événement webhook.test synchrone vers votre URL configurée - non persisté, non retenté.",
+      "signatureTitle": "Vérifier les signatures",
+      "signatureDesc": "Chaque livraison inclut un en-tête X-Sharepay-Signature de la forme",
+      "retriesTitle": "Livraison et relances",
+      "retriesDesc": "Une livraison échouée (réponse non-2xx, timeout, erreur de connexion) est retentée avec un backoff croissant, jusqu'à 5 tentatives au total."
+    },
+    "WebhooksEvents": {
+      "title": "Types d'événements webhook",
+      "description": "SharePay envoie ces événements vers votre URL webhook configurée au fil du cycle de vie des paiements.",
+      "listTitle": "Types d'événements",
+      "payloadTitle": "Format du payload",
+      "payloadDesc": "Chaque livraison partage cette enveloppe, data contenant l'objet spécifique à l'événement."
+    },
+    "SdkJs": {
+      "title": "JavaScript / Node.js",
+      "description": "Un exemple d'intégration minimal avec axios. Installez-le avec",
+      "clientTitle": "Client minimal"
+    },
+    "SdkPhp": {
+      "title": "PHP",
+      "description": "Un exemple d'intégration minimal en cURL natif. Compatible PHP 7.4+.",
+      "clientTitle": "Client minimal"
+    },
+    "SdkCsharp": {
+      "title": "C#",
+      "description": "Un exemple d'intégration minimal avec HttpClient. Compatible .NET 6+.",
+      "clientTitle": "Client minimal"
     }
   },
   "FAQ": {

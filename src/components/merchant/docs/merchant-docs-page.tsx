@@ -636,12 +636,16 @@ export function MerchantDocsPage() {
                                 <tbody className="divide-y divide-border">
                                     {[
                                         { http: "400", code: "VALIDATION_ERROR", desc: "Corps de la requête invalide ou champs manquants" },
+                                        { http: "400", code: "MALFORMED_JSON", desc: "Le corps de la requête n'est pas un JSON valide" },
+                                        { http: "400", code: "PROVIDER_NOT_SUPPORTED", desc: "paymentMethod ne correspond à aucun provider actif" },
+                                        { http: "400", code: "AMOUNT_BELOW_MINIMUM / ABOVE_MAXIMUM", desc: "Montant hors des bornes autorisées par le provider" },
                                         { http: "401", code: "UNAUTHORIZED", desc: "Clé API absente, invalide ou révoquée" },
                                         { http: "404", code: "NOT_FOUND", desc: "Ressource introuvable (référence inexistante)" },
                                         { http: "409", code: "DUPLICATE_REQUEST", desc: "Même idempotencyKey déjà traitée - doublon évité" },
-                                        { http: "422", code: "INSUFFICIENT_BALANCE", desc: "Solde insuffisant pour effectuer ce virement" },
+                                        { http: "409", code: "INSUFFICIENT_BALANCE", desc: "Solde disponible insuffisant pour effectuer ce virement" },
                                         { http: "429", code: "RATE_LIMIT_EXCEEDED", desc: "Limite de requêtes atteinte - attendez avant de réessayer" },
                                         { http: "500", code: "INTERNAL_ERROR", desc: "Erreur interne serveur" },
+                                        { http: "502", code: "MTN_GATEWAY_ERROR / ORANGE_GATEWAY_ERROR", desc: "L'opérateur Mobile Money n'a pas pu traiter la requête" },
                                     ].map((e) => (
                                         <tr key={e.code} className="hover:bg-muted/30 transition-colors">
                                             <td className="px-3 py-2.5 font-mono font-bold text-red-500">{e.http}</td>
@@ -731,7 +735,7 @@ export function MerchantDocsPage() {
                         </div>
                         <FieldTable title="Réponse (data)" fields={[
                             { name: "reference", type: "string", description: "Référence unique", example: "PI-A1B2C3D4E5F6" },
-                            { name: "status", type: '"PROCESSING"', description: "Statut initial - traitement en cours" },
+                            { name: "status", type: '"PENDING"', description: "Statut initial - traitement en cours" },
                             { name: "amount", type: "integer", description: "Montant" },
                             { name: "currency", type: "string", description: "Devise" },
                             { name: "paymentMethod", type: "string", description: "Provider utilisé" },
@@ -756,7 +760,7 @@ export function MerchantDocsPage() {
   "message": "Paiement initié.",
   "data": {
     "reference": "PI-A1B2C3D4E5F6",
-    "status": "PROCESSING",
+    "status": "PENDING",
     "amount": 5000,
     "currency": "XAF",
     "paymentMethod": "MTN_MOMO_CM",
@@ -782,8 +786,7 @@ export function MerchantDocsPage() {
                             <div className="flex flex-wrap gap-2 text-xs font-semibold">
                                 {[
                                     { s: "PENDING", cls: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400" },
-                                    { s: "PROCESSING", cls: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" },
-                                    { s: "SUCCESS", cls: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" },
+                                                                        { s: "SUCCESS", cls: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" },
                                     { s: "FAILED", cls: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400" },
                                     { s: "CANCELLED", cls: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400" },
                                     { s: "REFUNDED", cls: "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400" },
@@ -816,7 +819,7 @@ export function MerchantDocsPage() {
                         <EndpointHeader
                             method="POST"
                             path="/api/v1/pay-out/transfer"
-                            description="Crée un virement vers un bénéficiaire. Le montant est débité de votre solde disponible. La transaction passe immédiatement en PROCESSING - le résultat définitif est notifié par webhook."
+                            description="Crée un virement vers un bénéficiaire. Le montant est déplacé de votre solde disponible vers le solde en attente. La transaction reste PENDING jusqu'à confirmation - le résultat définitif est notifié par webhook."
                         />
                         <FieldTable title="Corps de la requête" fields={[
                             { name: "amount", type: "integer", required: true, description: "Montant à envoyer", example: "10000" },
@@ -830,7 +833,7 @@ export function MerchantDocsPage() {
                         ]} />
                         <FieldTable title="Réponse (data)" fields={[
                             { name: "reference", type: "string", description: "Référence unique du payout", example: "PO-A1B2C3D4E5F6" },
-                            { name: "status", type: '"PROCESSING"', description: "Statut initial" },
+                            { name: "status", type: '"PENDING"', description: "Statut initial" },
                             { name: "amount", type: "integer", description: "Montant" },
                             { name: "currency", type: "string", description: "Devise" },
                             { name: "paymentMethod", type: "string", description: "Provider utilisé" },
@@ -854,7 +857,7 @@ export function MerchantDocsPage() {
   "message": "Virement initié.",
   "data": {
     "reference": "PO-A1B2C3D4E5F6",
-    "status": "PROCESSING",
+    "status": "PENDING",
     "amount": 10000,
     "currency": "XAF",
     "paymentMethod": "MTN_MOMO_CM",
@@ -901,6 +904,14 @@ export function MerchantDocsPage() {
                             <code className="text-xs font-mono bg-muted px-1.5 py-0.5 rounded">X-Sharepay-Signature</code>.
                             Configurez votre URL dans <strong>Applications → Webhooks</strong>.
                         </p>
+                        <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50 rounded-xl p-4">
+                            <p className="text-xs font-semibold text-amber-800 dark:text-amber-300 mb-1">↻ Retries</p>
+                            <p className="text-xs text-amber-700 dark:text-amber-400 leading-relaxed">
+                                Une livraison qui échoue est retentée jusqu'à 5 fois avec un backoff croissant
+                                (+1 min, +5 min, +30 min, puis +2h). Passé 5 tentatives, la livraison est abandonnée -
+                                consultez l'historique des livraisons depuis le dashboard pour la rejouer manuellement.
+                            </p>
+                        </div>
 
                         <div className="border rounded-xl overflow-hidden text-xs">
                             <table className="w-full">
@@ -912,11 +923,16 @@ export function MerchantDocsPage() {
                                 </thead>
                                 <tbody className="divide-y divide-border">
                                     {[
+                                        { event: "payment.created", desc: "Une session de paiement entrant (checkout) vient d'être créée" },
                                         { event: "payment.success", desc: "Un paiement entrant a été confirmé par le provider" },
                                         { event: "payment.failed", desc: "Un paiement entrant a échoué ou a été rejeté" },
                                         { event: "payment.cancelled", desc: "Le client a annulé la session de paiement" },
+                                        { event: "payment.expired", desc: "La session de paiement a expiré sans être finalisée" },
+                                        { event: "payout.created", desc: "Un virement vers un bénéficiaire vient d'être initié" },
                                         { event: "payout.success", desc: "Un virement vers un bénéficiaire a réussi" },
                                         { event: "payout.failed", desc: "Un virement a échoué" },
+                                        { event: "payout.cancelled", desc: "Un virement a été annulé" },
+                                        { event: "collection.expired", desc: "Une page de collecte de fonds a atteint sa date d'expiration" },
                                         { event: "webhook.test", desc: "Événement de test envoyé depuis le dashboard" },
                                     ].map((e) => (
                                         <tr key={e.event} className="hover:bg-muted/30 transition-colors">
@@ -943,14 +959,24 @@ export function MerchantDocsPage() {
   }
 }`} />
 
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                            L'en-tête a la forme{" "}
+                            <code className="text-xs font-mono bg-muted px-1.5 py-0.5 rounded">t=&lt;epoch&gt;,v1=&lt;hmac-hex&gt;</code>{" "}
+                            - <code className="text-xs font-mono bg-muted px-1.5 py-0.5 rounded">v1</code> est le HMAC-SHA256
+                            calculé sur le corps JSON brut, avec votre <code className="text-xs font-mono bg-muted px-1.5 py-0.5 rounded">webhookSecret</code>.
+                        </p>
                         <CodeBlock lang="javascript" code={`// Vérification de la signature (Node.js / Express)
 const crypto = require('crypto');
 
-function verifySignature(rawBody, signature, secret) {
+function verifySignature(rawBody, signatureHeader, secret) {
+  // signatureHeader: "t=1735900000,v1=9f8c3a..."
+  const parts = Object.fromEntries(
+    signatureHeader.split(',').map((p) => p.split('='))
+  );
   const hmac = crypto.createHmac('sha256', secret);
   const digest = hmac.update(rawBody).digest('hex');
   return crypto.timingSafeEqual(
-    Buffer.from(signature, 'hex'),
+    Buffer.from(parts.v1, 'hex'),
     Buffer.from(digest, 'hex')
   );
 }
@@ -958,7 +984,7 @@ function verifySignature(rawBody, signature, secret) {
 app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
   const sig = req.headers['x-sharepay-signature'];
 
-  if (!verifySignature(req.body, sig, process.env.WEBHOOK_SECRET)) {
+  if (!sig || !verifySignature(req.body, sig, process.env.WEBHOOK_SECRET)) {
     return res.status(401).send('Signature invalide');
   }
 
