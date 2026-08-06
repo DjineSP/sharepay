@@ -1,15 +1,15 @@
 # ============================================================
 # STAGE 1 - Dépendances
-# Installe uniquement les dépendances npm
+# Installe uniquement les dépendances pnpm
 # ============================================================
 FROM node:22-alpine AS deps
 
 WORKDIR /app
 
-RUN npm install -g npm@11
+RUN corepack enable && corepack prepare pnpm@11.12.0 --activate
 
-COPY package.json package-lock.json ./
-RUN npm ci --ignore-scripts
+COPY package.json pnpm-lock.yaml .npmrc ./
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
 
 # ============================================================
@@ -34,7 +34,8 @@ ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ENV NEXT_PUBLIC_DOCS_BASE_URL=$NEXT_PUBLIC_DOCS_BASE_URL
 ENV NEXT_PUBLIC_SWAGGER_URL=$NEXT_PUBLIC_SWAGGER_URL
 
-RUN npm run build
+RUN corepack enable && corepack prepare pnpm@11.12.0 --activate
+RUN pnpm run build
 
 
 # ============================================================

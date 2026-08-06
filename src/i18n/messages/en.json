@@ -1543,7 +1543,45 @@
       "intro-payment-methods": "Payment Methods",
       "auth-overview": "Overview",
       "auth-api-keys": "API Keys",
-      "auth-best-practices": "Best Practices"
+      "auth-best-practices": "Best Practices",
+      "responses-overview": "Overview",
+      "responses-envelope": "The envelope",
+      "responses-pagination": "Paginated lists",
+      "responses-success-overview": "Overview",
+      "responses-success-example": "Example",
+      "responses-failed-overview": "Overview",
+      "responses-failed-example": "Example",
+      "responses-rejected-overview": "Overview",
+      "responses-rejected-example": "Example",
+      "errors-overview": "Overview",
+      "errors-http": "HTTP-level errors",
+      "errors-business": "Business error codes",
+      "health-overview": "Overview",
+      "health-request": "Request",
+      "health-response": "Response",
+      "initiate-overview": "Overview",
+      "initiate-checkout": "Checkout (hosted page)",
+      "initiate-charge": "Charge (direct debit)",
+      "status-overview": "Overview",
+      "status-payin": "Pay-In status",
+      "status-payout": "Pay-Out status",
+      "status-values": "Status values",
+      "payout-overview": "Overview",
+      "payout-transfer": "Create a transfer",
+      "payout-balance": "Balance behavior",
+      "webhooks-config-overview": "Overview",
+      "webhooks-config-endpoints": "Configuration endpoints",
+      "webhooks-config-signature": "Verifying signatures",
+      "webhooks-config-retries": "Delivery & retries",
+      "webhooks-events-overview": "Overview",
+      "webhooks-events-list": "Event types",
+      "webhooks-events-payload": "Payload shape",
+      "sdk-js-overview": "Overview",
+      "sdk-js-client": "Minimal client",
+      "sdk-php-overview": "Overview",
+      "sdk-php-client": "Minimal client",
+      "sdk-csharp-overview": "Overview",
+      "sdk-csharp-client": "Minimal client"
     },
     "Intro": {
       "title": "Developer Documentation",
@@ -1563,6 +1601,105 @@
       "apiVersion": "Our API versioning follows a date-based format. The current version is",
       "paymentMethodsTitle": "Supported Payment Methods",
       "paymentMethodsDesc": "We currently support payments via MTN Mobile Money and Orange Money to facilitate your local transactions."
+    },
+    "Responses": {
+      "title": "Responses",
+      "description": "Every SharePay API response - success or error - uses the same ApiResponse<T> envelope, so your integration only needs one code path to parse results.",
+      "envelopeTitle": "The envelope",
+      "envelopeDesc": "All endpoints wrap their payload in this shape, whether the call succeeded or not.",
+      "paginationTitle": "Paginated lists",
+      "paginationDesc": "List endpoints (transactions, applications, fund collections...) wrap their content in a PaginationResponse<T> instead of a bare array."
+    },
+    "ResponsesSuccess": {
+      "title": "Success",
+      "description": "A successful call returns success: true along with a business code and the requested data.",
+      "exampleTitle": "Example"
+    },
+    "ResponsesFailed": {
+      "title": "Failed",
+      "description": "Malformed requests - missing fields, invalid types, bad JSON - are rejected before any business logic runs.",
+      "exampleTitle": "Example"
+    },
+    "ResponsesRejected": {
+      "title": "Rejected",
+      "description": "A well-formed request can still be rejected when the caller is not allowed to perform the action, e.g. an inactive account or an insufficient role.",
+      "exampleTitle": "Example"
+    },
+    "Errors": {
+      "title": "Error Codes",
+      "description": "When success is false, data is null and the code field identifies exactly what went wrong.",
+      "httpTitle": "HTTP-level errors",
+      "httpDesc": "Raised by the global exception handler before your request reaches business logic.",
+      "businessTitle": "Business error codes",
+      "businessDesc": "Raised inside the payment flow itself - these carry more specific meaning than a generic HTTP status."
+    },
+    "Health": {
+      "title": "Health",
+      "description": "A lightweight, unauthenticated endpoint to check that the API is reachable - useful for uptime monitors and load balancer probes.",
+      "requestTitle": "Request",
+      "requestDesc": "Returns immediately with no side effects. No API key required.",
+      "responseTitle": "Response",
+      "responseDesc": "A 200 response with status: \"UP\" means the service is reachable."
+    },
+    "Initiate": {
+      "title": "Initiate a payment",
+      "description": "Two ways to collect money from a customer: send them to a hosted Checkout page, or charge their Mobile Money account directly from your backend.",
+      "checkoutTitle": "Checkout - hosted page",
+      "checkoutDesc": "Creates a web payment session valid for 30 minutes. Redirect your customer to the returned paymentUrl so they can pick their operator and complete payment.",
+      "chargeTitle": "Charge - direct debit",
+      "chargeDesc": "Initiates a payment with no intermediate web page. The provider and payer account must be supplied in the request. Use idempotencyKey to avoid duplicates on retry."
+    },
+    "Status": {
+      "title": "Check a transaction status",
+      "description": "Poll these endpoints while waiting for a webhook notification, or to reconcile your own records against SharePay's.",
+      "payinTitle": "Pay-In status",
+      "payinDesc": "Returns the current status of an incoming transaction (CHECKOUT or CHARGE) identified by its reference.",
+      "payoutTitle": "Pay-Out status",
+      "payoutDesc": "Returns the current status of an outgoing transfer identified by its reference.",
+      "valuesTitle": "Status values",
+      "valuesDesc": "Every transaction - incoming or outgoing - moves through this same set of statuses."
+    },
+    "Payout": {
+      "title": "Payout (Withdrawals)",
+      "description": "Send funds from your SharePay balance to a Mobile Money beneficiary.",
+      "transferTitle": "Create a transfer",
+      "transferDesc": "Creates a transfer to a beneficiary. The amount is debited from your available balance. The transaction moves to PENDING immediately - the final result is notified by webhook.",
+      "balanceTitle": "Balance behavior",
+      "balanceDesc": "Understanding how your available and pending balances move during a payout helps you avoid surprises when reconciling."
+    },
+    "WebhooksConfig": {
+      "title": "Webhook configuration",
+      "description": "Manage the URL SharePay delivers events to, rotate your signing secret, and send yourself a test event.",
+      "endpointsTitle": "Configuration endpoints",
+      "getDesc": "Returns your current webhook configuration. The secret is shown only as a short prefix, never in full.",
+      "patchDesc": "Updates the destination URL events are delivered to.",
+      "testDesc": "Sends a synchronous webhook.test event to your configured URL right away - not persisted, not retried.",
+      "signatureTitle": "Verifying signatures",
+      "signatureDesc": "Every delivery includes an X-Sharepay-Signature header of the form",
+      "retriesTitle": "Delivery & retries",
+      "retriesDesc": "A failed delivery (non-2xx response, timeout, connection error) is retried with increasing backoff, up to 5 attempts total."
+    },
+    "WebhooksEvents": {
+      "title": "Webhook event types",
+      "description": "SharePay dispatches these events to your configured webhook URL as things happen across the payment lifecycle.",
+      "listTitle": "Event types",
+      "payloadTitle": "Payload shape",
+      "payloadDesc": "Every delivery shares this envelope, with data holding the event-specific object."
+    },
+    "SdkJs": {
+      "title": "JavaScript / Node.js",
+      "description": "A minimal integration example using axios. Install it with",
+      "clientTitle": "Minimal client"
+    },
+    "SdkPhp": {
+      "title": "PHP",
+      "description": "A minimal integration example using native cURL. Compatible with PHP 7.4+.",
+      "clientTitle": "Minimal client"
+    },
+    "SdkCsharp": {
+      "title": "C#",
+      "description": "A minimal integration example using HttpClient. Compatible with .NET 6+.",
+      "clientTitle": "Minimal client"
     }
   },
   "FAQ": {

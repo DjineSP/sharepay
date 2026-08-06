@@ -11,6 +11,22 @@ import { DocSection, flatDocStructure } from "./doc-config";
 // Sections
 import { DevelopersIntroduction, introductionNavItems } from "./sections/getting-started/developers-introduction";
 import { DevelopersAuthentication, authenticationNavItems } from "./sections/getting-started/developers-authentication";
+import {
+    DevelopersResponses, responsesNavItems,
+    DevelopersResponsesSuccess, responsesSuccessNavItems,
+    DevelopersResponsesFailed, responsesFailedNavItems,
+    DevelopersResponsesRejected, responsesRejectedNavItems,
+} from "./sections/getting-started/developers-responses";
+import { DevelopersErrors, errorsNavItems } from "./sections/getting-started/developers-errors";
+import { DevelopersHealth, healthNavItems } from "./sections/api-rest/developers-health";
+import { DevelopersInitiate, initiateNavItems } from "./sections/api-rest/developers-initiate";
+import { DevelopersStatus, statusNavItems } from "./sections/api-rest/developers-status";
+import { DevelopersPayout, payoutNavItems } from "./sections/api-rest/developers-payout";
+import { DevelopersWebhooksConfig, webhooksConfigNavItems } from "./sections/webhooks/developers-webhooks-config";
+import { DevelopersWebhooksEvents, webhooksEventsNavItems } from "./sections/webhooks/developers-webhooks-events";
+import { DevelopersSdkJs, sdkJsNavItems } from "./sections/sdks/developers-sdk-js";
+import { DevelopersSdkPhp, sdkPhpNavItems } from "./sections/sdks/developers-sdk-php";
+import { DevelopersSdkCsharp, sdkCsharpNavItems } from "./sections/sdks/developers-sdk-csharp";
 
 export function DevelopersContent() {
     const t = useTranslations("Developers");
@@ -29,6 +45,34 @@ export function DevelopersContent() {
                 return <DevelopersIntroduction onNavigate={navToSection} />;
             case "authentication":
                 return <DevelopersAuthentication />;
+            case "responses":
+                return <DevelopersResponses />;
+            case "responses-success":
+                return <DevelopersResponsesSuccess />;
+            case "responses-failed":
+                return <DevelopersResponsesFailed />;
+            case "responses-rejected":
+                return <DevelopersResponsesRejected />;
+            case "errors":
+                return <DevelopersErrors />;
+            case "health":
+                return <DevelopersHealth />;
+            case "initiate":
+                return <DevelopersInitiate />;
+            case "status":
+                return <DevelopersStatus />;
+            case "payout":
+                return <DevelopersPayout />;
+            case "webhooks-config":
+                return <DevelopersWebhooksConfig />;
+            case "webhooks-events":
+                return <DevelopersWebhooksEvents />;
+            case "sdk-js":
+                return <DevelopersSdkJs />;
+            case "sdk-php":
+                return <DevelopersSdkPhp />;
+            case "sdk-csharp":
+                return <DevelopersSdkCsharp />;
             default:
                 // Find title from flat structure to display in Under Construction
                 const docInfo = flatDocStructure.find(d => d.id === activeSection);
@@ -57,6 +101,48 @@ export function DevelopersContent() {
                 break;
             case "authentication":
                 items = authenticationNavItems;
+                break;
+            case "responses":
+                items = responsesNavItems;
+                break;
+            case "responses-success":
+                items = responsesSuccessNavItems;
+                break;
+            case "responses-failed":
+                items = responsesFailedNavItems;
+                break;
+            case "responses-rejected":
+                items = responsesRejectedNavItems;
+                break;
+            case "errors":
+                items = errorsNavItems;
+                break;
+            case "health":
+                items = healthNavItems;
+                break;
+            case "initiate":
+                items = initiateNavItems;
+                break;
+            case "status":
+                items = statusNavItems;
+                break;
+            case "payout":
+                items = payoutNavItems;
+                break;
+            case "webhooks-config":
+                items = webhooksConfigNavItems;
+                break;
+            case "webhooks-events":
+                items = webhooksEventsNavItems;
+                break;
+            case "sdk-js":
+                items = sdkJsNavItems;
+                break;
+            case "sdk-php":
+                items = sdkPhpNavItems;
+                break;
+            case "sdk-csharp":
+                items = sdkCsharpNavItems;
                 break;
             default:
                 items = [];

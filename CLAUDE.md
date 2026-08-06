@@ -124,16 +124,16 @@ export default function FooPage() {
 
 ```bash
 # Développement
-npm run dev
+pnpm dev
 
 # Build de production
-npm run build
+pnpm build
 
 # Linter
-npm run lint
+pnpm lint
 
 # Type check
-npx tsc --noEmit
+pnpm exec tsc --noEmit
 
 # Docker
 docker compose up --build
